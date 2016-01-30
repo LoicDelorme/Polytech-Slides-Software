@@ -1,5 +1,6 @@
 package com.delormeloic.generator.model.slides;
 
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
@@ -36,12 +37,7 @@ public interface IConstants
 	public static final String DEFAULT_TEXT = "";
 
 	/**
-	 * The default image width.
+	 * The default background color.
 	 */
-	public static final int DEFAULT_IMAGE_WIDTH = 400;
-
-	/**
-	 * The default image height.
-	 */
-	public static final int DEFAULT_IMAGE_HEIGHT = 400;
+	public static final Color DEFAULT_BACKGROUND_COLOR = new Color(0, 155, 221, 1);
 }

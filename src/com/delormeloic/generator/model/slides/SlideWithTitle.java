@@ -3,10 +3,8 @@ package com.delormeloic.generator.model.slides;
 import org.json.JSONObject;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -46,11 +44,6 @@ public class SlideWithTitle extends Slide
 	public static final String TITLE_FONT_ATTRIBUTE = "titleFont";
 
 	/**
-	 * The title size attribute.
-	 */
-	public static final String TITLE_SIZE_ATTRIBUTE = "titleSize";
-
-	/**
 	 * The header.
 	 */
 	private final BooleanProperty header;
@@ -71,11 +64,6 @@ public class SlideWithTitle extends Slide
 	private final ObjectProperty<Font> titleFont;
 
 	/**
-	 * The title size.
-	 */
-	private final IntegerProperty titleSize;
-
-	/**
 	 * Create a slide with a title.
 	 * 
 	 * @param name
@@ -90,7 +78,6 @@ public class SlideWithTitle extends Slide
 		this.footer = new SimpleBooleanProperty(data.getBoolean(FOOTER_ATTRIBUTE));
 		this.title = new SimpleStringProperty(data.getString(TITLE_ATTRIBUTE));
 		this.titleFont = new SimpleObjectProperty<Font>(new Font(data.getString(TITLE_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
-		this.titleSize = new SimpleIntegerProperty(data.getInt(TITLE_SIZE_ATTRIBUTE));
 	}
 
 	/**
@@ -106,7 +93,6 @@ public class SlideWithTitle extends Slide
 		this.footer = new SimpleBooleanProperty(IConstants.DEFAULT_FOOTER_VALUE);
 		this.title = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 		this.titleFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
-		this.titleSize = new SimpleIntegerProperty(IConstants.DEFAULT_FONT_SIZE);
 	}
 
 	/**
@@ -190,26 +176,6 @@ public class SlideWithTitle extends Slide
 	}
 
 	/**
-	 * Get the title size.
-	 * 
-	 * @return The title size.
-	 */
-	public int getTitleSize()
-	{
-		return this.titleSize.get();
-	}
-
-	/**
-	 * Get the title size property.
-	 * 
-	 * @return The title size property.
-	 */
-	public IntegerProperty getTitleSizeProperty()
-	{
-		return this.titleSize;
-	}
-
-	/**
 	 * @see com.delormeloic.generator.model.slides.Slide#getData()
 	 */
 	@Override
@@ -220,7 +186,6 @@ public class SlideWithTitle extends Slide
 		data.put(FOOTER_ATTRIBUTE, getFooter());
 		data.put(TITLE_ATTRIBUTE, getTitle());
 		data.put(TITLE_FONT_ATTRIBUTE, getTitleFont().getName());
-		data.put(TITLE_SIZE_ATTRIBUTE, getTitleSize());
 
 		return data;
 	}

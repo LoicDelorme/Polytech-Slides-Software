@@ -21,12 +21,12 @@ public enum SlideType
     /**
      * A slide with a title.
      */
-	SLIDE_WITH_TITLE("/com/delormeloic/generator/view/resources/images/add_slide.png", SlideWithTitle.class, SlideWithTitleForm.class),
+	SLIDE_WITH_TITLE("/com/delormeloic/generator/view/resources/images/slide_with_title.png", SlideWithTitle.class, SlideWithTitleForm.class),
 
 	/**
 	 * A slide with a speech.
 	 */
-	SLIDE_WITH_SPEECH("/com/delormeloic/generator/view/resources/images/add_slide.png", SlideWithSpeech.class, SlideWithSpeechForm.class);
+	SLIDE_WITH_SPEECH("/com/delormeloic/generator/view/resources/images/slide_with_speech.png", SlideWithSpeech.class, SlideWithSpeechForm.class);
 
 	/**
 	 * The image path.

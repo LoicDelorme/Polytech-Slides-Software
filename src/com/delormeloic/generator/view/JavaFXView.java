@@ -10,6 +10,7 @@ import com.delormeloic.generator.model.IModel;
 import com.delormeloic.generator.view.converters.SlideFormCallback;
 import com.delormeloic.generator.view.helpers.DialogHelper;
 import com.delormeloic.generator.view.helpers.TextHelper;
+import com.delormeloic.generator.view.slidesforms.BackgroundForm;
 import com.delormeloic.generator.view.slidesforms.FooterForm;
 import com.delormeloic.generator.view.slidesforms.HeaderForm;
 import com.delormeloic.generator.view.slidesforms.IFormable;
@@ -165,6 +166,7 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 		computeDisabledButtons(-1);
 		this.addSlideButton.setDisable(true);
 
+		this.stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/polytech_icon.png")));
 		this.stage.setTitle(title);
 		this.stage.setScene(new Scene(this, width, height));
 	}
@@ -299,10 +301,10 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.IView#setData(com.delormeloic.generator.view.slidesforms.HeaderForm, com.delormeloic.generator.view.slidesforms.FooterForm, java.util.List)
+	 * @see com.delormeloic.generator.view.IView#setData(com.delormeloic.generator.view.slidesforms.HeaderForm, com.delormeloic.generator.view.slidesforms.FooterForm, com.delormeloic.generator.view.slidesforms.BackgroundForm, java.util.List)
 	 */
 	@Override
-	public void setData(HeaderForm headerForm, FooterForm footerForm, List<SlideForm> slidesForms)
+	public void setData(HeaderForm headerForm, FooterForm footerForm, BackgroundForm backgroundForm, List<SlideForm> slidesForms)
 	{
 		clearData();
 
@@ -310,7 +312,7 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 		this.addSlideButton.setDisable(false);
 
 		this.slidesForms.getItems().addAll(slidesForms);
-		this.formables.getItems().addAll(headerForm, footerForm);
+		this.formables.getItems().addAll(headerForm, footerForm, backgroundForm);
 
 		this.slidesForms.getSelectionModel().selectedItemProperty().addListener(this);
 		this.formables.getSelectionModel().selectedItemProperty().addListener(this);

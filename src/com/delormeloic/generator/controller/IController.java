@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.delormeloic.generator.model.IModel;
+import com.delormeloic.generator.model.slides.Background;
 import com.delormeloic.generator.model.slides.Footer;
 import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.model.slides.Slide;
@@ -120,8 +121,10 @@ public interface IController
 	 *            The header.
 	 * @param footer
 	 *            The footer.
+	 * @param background
+	 *            The background.
 	 * @param slides
 	 *            The slides.
 	 */
-	public void notifySetData(Header header, Footer footer, List<Slide> slides);
+	public void notifySetData(Header header, Footer footer, Background background, List<Slide> slides);
 }

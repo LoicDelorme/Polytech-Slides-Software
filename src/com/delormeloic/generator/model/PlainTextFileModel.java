@@ -9,6 +9,7 @@ import java.util.List;
 import com.delormeloic.generator.controller.IController;
 import com.delormeloic.generator.model.helpers.FileReaderHelper;
 import com.delormeloic.generator.model.helpers.FileWriterHelper;
+import com.delormeloic.generator.model.slides.Background;
 import com.delormeloic.generator.model.slides.Footer;
 import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.model.slides.Slide;
@@ -42,6 +43,11 @@ public abstract class PlainTextFileModel implements IModel
 	protected Footer footer;
 
 	/**
+	 * The background.
+	 */
+	protected Background background;
+
+	/**
 	 * The slides.
 	 */
 	protected List<Slide> slides;
@@ -62,6 +68,7 @@ public abstract class PlainTextFileModel implements IModel
 		this.controller = controller;
 		this.header = null;
 		this.footer = null;
+		this.background = null;
 		this.slides = null;
 		this.currentProject = null;
 	}
@@ -89,11 +96,12 @@ public abstract class PlainTextFileModel implements IModel
 	{
 		this.header = new Header();
 		this.footer = new Footer();
+		this.background = new Background();
 		this.slides = new ArrayList<Slide>();
 		this.currentProject = newProject;
 
 		saveProject();
-		this.controller.notifySetData(this.header, this.footer, this.slides);
+		this.controller.notifySetData(this.header, this.footer, this.background, this.slides);
 	}
 
 	/**
@@ -105,7 +113,7 @@ public abstract class PlainTextFileModel implements IModel
 		this.currentProject = projectFile;
 
 		parseData(FileReaderHelper.readPlainTextFile(this.currentProject));
-		this.controller.notifySetData(this.header, this.footer, this.slides);
+		this.controller.notifySetData(this.header, this.footer, this.background, this.slides);
 	}
 
 	/**
@@ -138,6 +146,7 @@ public abstract class PlainTextFileModel implements IModel
 
 		this.header = null;
 		this.footer = null;
+		this.background = null;
 		this.slides = null;
 	}
 

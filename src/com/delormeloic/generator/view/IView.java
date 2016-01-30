@@ -2,6 +2,7 @@ package com.delormeloic.generator.view;
 
 import java.util.List;
 
+import com.delormeloic.generator.view.slidesforms.BackgroundForm;
 import com.delormeloic.generator.view.slidesforms.FooterForm;
 import com.delormeloic.generator.view.slidesforms.HeaderForm;
 import com.delormeloic.generator.view.slidesforms.SlideForm;
@@ -72,10 +73,12 @@ public interface IView
 	 *            The header form.
 	 * @param footer
 	 *            The footer form.
+	 * @param background
+	 *            The background form.
 	 * @param slidesForms
 	 *            The slides forms.
 	 */
-	public void setData(HeaderForm header, FooterForm footer, List<SlideForm> slidesForms);
+	public void setData(HeaderForm header, FooterForm footer, BackgroundForm background, List<SlideForm> slidesForms);
 
 	/**
 	 * Clear data.

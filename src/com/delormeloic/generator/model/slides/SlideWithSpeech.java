@@ -3,10 +3,8 @@ package com.delormeloic.generator.model.slides;
 import org.json.JSONObject;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -46,11 +44,6 @@ public class SlideWithSpeech extends Slide
 	public static final String TITLE_FONT_ATTRIBUTE = "titleFont";
 
 	/**
-	 * The title size attribute.
-	 */
-	public static final String TITLE_SIZE_ATTRIBUTE = "titleSize";
-
-	/**
 	 * The speech attribute.
 	 */
 	public static final String SPEECH_ATTRIBUTE = "speech";
@@ -61,24 +54,9 @@ public class SlideWithSpeech extends Slide
 	public static final String SPEECH_FONT_ATTRIBUTE = "speechFont";
 
 	/**
-	 * The speech size attribute.
-	 */
-	public static final String SPEECH_SIZE_ATTRIBUTE = "speechSize";
-
-	/**
 	 * The image attribute.
 	 */
 	public static final String IMAGE_ATTRIBUTE = "image";
-
-	/**
-	 * The image width attribute.
-	 */
-	public static final String IMAGE_WIDTH_ATTRIBUTE = "imageWidth";
-
-	/**
-	 * The image height attribute.
-	 */
-	public static final String IMAGE_HEIGHT_ATTRIBUTE = "imageHeight";
 
 	/**
 	 * The header.
@@ -101,11 +79,6 @@ public class SlideWithSpeech extends Slide
 	private final ObjectProperty<Font> titleFont;
 
 	/**
-	 * The title size.
-	 */
-	private final IntegerProperty titleSize;
-
-	/**
 	 * The speech.
 	 */
 	private final StringProperty speech;
@@ -116,24 +89,9 @@ public class SlideWithSpeech extends Slide
 	private final ObjectProperty<Font> speechFont;
 
 	/**
-	 * The speech size.
-	 */
-	private final IntegerProperty speechSize;
-
-	/**
 	 * The image.
 	 */
 	private final StringProperty image;
-
-	/**
-	 * The image width.
-	 */
-	private final IntegerProperty imageWidth;
-
-	/**
-	 * The image height.
-	 */
-	private final IntegerProperty imageHeight;
 
 	/**
 	 * Create a slide with a speech.
@@ -150,13 +108,9 @@ public class SlideWithSpeech extends Slide
 		this.footer = new SimpleBooleanProperty(data.getBoolean(FOOTER_ATTRIBUTE));
 		this.title = new SimpleStringProperty(data.getString(TITLE_ATTRIBUTE));
 		this.titleFont = new SimpleObjectProperty<Font>(new Font(data.getString(TITLE_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
-		this.titleSize = new SimpleIntegerProperty(data.getInt(TITLE_SIZE_ATTRIBUTE));
 		this.speech = new SimpleStringProperty(data.getString(SPEECH_ATTRIBUTE));
 		this.speechFont = new SimpleObjectProperty<Font>(new Font(data.getString(SPEECH_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
-		this.speechSize = new SimpleIntegerProperty(data.getInt(SPEECH_SIZE_ATTRIBUTE));
 		this.image = new SimpleStringProperty(data.getString(IMAGE_ATTRIBUTE));
-		this.imageWidth = new SimpleIntegerProperty(data.getInt(IMAGE_WIDTH_ATTRIBUTE));
-		this.imageHeight = new SimpleIntegerProperty(data.getInt(IMAGE_HEIGHT_ATTRIBUTE));
 	}
 
 	/**
@@ -172,13 +126,9 @@ public class SlideWithSpeech extends Slide
 		this.footer = new SimpleBooleanProperty(IConstants.DEFAULT_FOOTER_VALUE);
 		this.title = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 		this.titleFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
-		this.titleSize = new SimpleIntegerProperty(IConstants.DEFAULT_FONT_SIZE);
 		this.speech = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 		this.speechFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
-		this.speechSize = new SimpleIntegerProperty(IConstants.DEFAULT_FONT_SIZE);
 		this.image = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
-		this.imageWidth = new SimpleIntegerProperty(IConstants.DEFAULT_IMAGE_WIDTH);
-		this.imageHeight = new SimpleIntegerProperty(IConstants.DEFAULT_IMAGE_HEIGHT);
 	}
 
 	/**
@@ -262,26 +212,6 @@ public class SlideWithSpeech extends Slide
 	}
 
 	/**
-	 * Get the title size.
-	 * 
-	 * @return The title size.
-	 */
-	public int getTitleSize()
-	{
-		return this.titleSize.get();
-	}
-
-	/**
-	 * Get the title size property.
-	 * 
-	 * @return The title size property.
-	 */
-	public IntegerProperty getTitleSizeProperty()
-	{
-		return this.titleSize;
-	}
-
-	/**
 	 * Get the speech.
 	 * 
 	 * @return The speech.
@@ -322,26 +252,6 @@ public class SlideWithSpeech extends Slide
 	}
 
 	/**
-	 * Get the speech size.
-	 * 
-	 * @return The speech size.
-	 */
-	public int getSpeechSize()
-	{
-		return this.speechSize.get();
-	}
-
-	/**
-	 * Get the speech size property.
-	 * 
-	 * @return The speech size property.
-	 */
-	public IntegerProperty getSpeechSizeProperty()
-	{
-		return this.speechSize;
-	}
-
-	/**
 	 * Get the image.
 	 * 
 	 * @return The image.
@@ -362,46 +272,6 @@ public class SlideWithSpeech extends Slide
 	}
 
 	/**
-	 * Get the image width.
-	 * 
-	 * @return The image width.
-	 */
-	public int getImageWidth()
-	{
-		return this.imageWidth.get();
-	}
-
-	/**
-	 * Get the image width property.
-	 * 
-	 * @return The image width property.
-	 */
-	public IntegerProperty getImageWidthProperty()
-	{
-		return this.imageWidth;
-	}
-
-	/**
-	 * Get the image height.
-	 * 
-	 * @return The image height.
-	 */
-	public int getImageHeight()
-	{
-		return this.imageHeight.get();
-	}
-
-	/**
-	 * Get the image height property.
-	 * 
-	 * @return The image height property.
-	 */
-	public IntegerProperty getImageHeightProperty()
-	{
-		return this.imageHeight;
-	}
-
-	/**
 	 * @see com.delormeloic.generator.model.slides.Slide#getData()
 	 */
 	@Override
@@ -412,13 +282,9 @@ public class SlideWithSpeech extends Slide
 		data.put(FOOTER_ATTRIBUTE, getFooter());
 		data.put(TITLE_ATTRIBUTE, getTitle());
 		data.put(TITLE_FONT_ATTRIBUTE, getTitleFont().getName());
-		data.put(TITLE_SIZE_ATTRIBUTE, getTitleSize());
 		data.put(SPEECH_ATTRIBUTE, getSpeech());
 		data.put(SPEECH_FONT_ATTRIBUTE, getSpeechFont().getName());
-		data.put(SPEECH_SIZE_ATTRIBUTE, getSpeechSize());
 		data.put(IMAGE_ATTRIBUTE, getImage());
-		data.put(IMAGE_WIDTH_ATTRIBUTE, getImageWidth());
-		data.put(IMAGE_HEIGHT_ATTRIBUTE, getImageHeight());
 
 		return data;
 	}

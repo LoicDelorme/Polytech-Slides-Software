@@ -39,5 +39,5 @@ public interface IConstants
 	/**
 	 * The default background color.
 	 */
-	public static final Color DEFAULT_BACKGROUND_COLOR = new Color(0, 155, 221, 1);
+	public static final Color DEFAULT_BACKGROUND_COLOR = Color.rgb(0, 155, 221);
 }

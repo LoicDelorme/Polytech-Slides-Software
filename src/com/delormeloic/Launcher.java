@@ -16,7 +16,6 @@ import com.delormeloic.utils.logger.Logger;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -54,7 +53,6 @@ public class Launcher extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/polytech_icon.png")));
 		final Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
 
 		final IController controller = new BasicController();

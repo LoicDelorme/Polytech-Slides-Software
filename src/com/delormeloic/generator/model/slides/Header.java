@@ -2,9 +2,7 @@ package com.delormeloic.generator.model.slides;
 
 import org.json.JSONObject;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -29,11 +27,6 @@ public class Header implements ISerializable
 	public static final String MIDDLE_TEXT_FONT_ATTRIBUTE = "middleTextFont";
 
 	/**
-	 * The middle text size attribute.
-	 */
-	public static final String MIDDLE_TEXT_SIZE_ATTRIBUTE = "middleTextSize";
-
-	/**
 	 * The middle text.
 	 */
 	private final StringProperty middleText;
@@ -42,11 +35,6 @@ public class Header implements ISerializable
 	 * The middle text font.
 	 */
 	private final ObjectProperty<Font> middleTextFont;
-
-	/**
-	 * The middle text size.
-	 */
-	private final IntegerProperty middleTextSize;
 
 	/**
 	 * Create an header.
@@ -58,7 +46,6 @@ public class Header implements ISerializable
 	{
 		this.middleText = new SimpleStringProperty(data.getString(MIDDLE_TEXT_ATTRIBUTE));
 		this.middleTextFont = new SimpleObjectProperty<Font>(new Font(data.getString(MIDDLE_TEXT_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
-		this.middleTextSize = new SimpleIntegerProperty(data.getInt(MIDDLE_TEXT_SIZE_ATTRIBUTE));
 	}
 
 	/**
@@ -68,7 +55,6 @@ public class Header implements ISerializable
 	{
 		this.middleText = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 		this.middleTextFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
-		this.middleTextSize = new SimpleIntegerProperty(IConstants.DEFAULT_FONT_SIZE);
 	}
 
 	/**
@@ -112,26 +98,6 @@ public class Header implements ISerializable
 	}
 
 	/**
-	 * Get the middle text size.
-	 * 
-	 * @return The middle text size.
-	 */
-	public int getMiddleTextSize()
-	{
-		return this.middleTextSize.get();
-	}
-
-	/**
-	 * Get the middle text size property.
-	 * 
-	 * @return The middle text size property.
-	 */
-	public IntegerProperty getMiddleTextSizeProperty()
-	{
-		return this.middleTextSize;
-	}
-
-	/**
 	 * @see com.delormeloic.generator.model.slides.ISerializable#toJSON()
 	 */
 	@Override
@@ -140,7 +106,6 @@ public class Header implements ISerializable
 		final JSONObject data = new JSONObject();
 		data.put(MIDDLE_TEXT_ATTRIBUTE, getMiddleText());
 		data.put(MIDDLE_TEXT_FONT_ATTRIBUTE, getMiddleTextFont().getName());
-		data.put(MIDDLE_TEXT_SIZE_ATTRIBUTE, getMiddleTextSize());
 
 		return data;
 	}
@@ -151,7 +116,7 @@ public class Header implements ISerializable
 	@Override
 	public int hashCode()
 	{
-		return (getMiddleText().hashCode() + getMiddleTextFont().hashCode() + getMiddleTextSize());
+		return (getMiddleText().hashCode() + getMiddleTextFont().hashCode());
 	}
 
 	/**
@@ -183,11 +148,6 @@ public class Header implements ISerializable
 		}
 
 		if (!getMiddleTextFont().equals(header.getMiddleTextFont()))
-		{
-			return false;
-		}
-
-		if (getMiddleTextSize() != header.getMiddleTextSize())
 		{
 			return false;
 		}

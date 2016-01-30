@@ -25,7 +25,7 @@ public class SlideChooser extends GridPane implements EventHandler<ActionEvent>
 	/**
 	 * The list of slides choosers items.
 	 */
-	private final List<SlideChooserItem> items = new ArrayList<>();
+	private final List<SlideChooserItem> items = new ArrayList<SlideChooserItem>();
 
 	{
 		for (SlideType slideType : SlideType.values())

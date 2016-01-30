@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.delormeloic.generator.controller.IController;
-import com.delormeloic.generator.model.helpers.parsers.SlideParserHelper;
+import com.delormeloic.generator.model.helpers.SlideParserHelper;
 import com.delormeloic.generator.model.slides.Footer;
 import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.model.slides.Slide;

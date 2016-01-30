@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.delormeloic.generator.controller.IController;
-import com.delormeloic.generator.model.helpers.files.FileReaderHelper;
-import com.delormeloic.generator.model.helpers.files.FileWriterHelper;
+import com.delormeloic.generator.model.helpers.FileReaderHelper;
+import com.delormeloic.generator.model.helpers.FileWriterHelper;
 import com.delormeloic.generator.model.slides.Footer;
 import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.model.slides.Slide;

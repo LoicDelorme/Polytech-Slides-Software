@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.delormeloic.generator.model.helpers.parsers.SlideParserHelper;
+import com.delormeloic.generator.model.helpers.SlideParserHelper;
 import com.delormeloic.generator.model.slides.Slide;
 import com.delormeloic.generator.view.slidesforms.SlideForm;
 import com.delormeloic.utils.logger.Logger;

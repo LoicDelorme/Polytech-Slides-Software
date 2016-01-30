@@ -1,4 +1,4 @@
-package com.delormeloic.generator.model.helpers.files;
+package com.delormeloic.generator.model.helpers;
 
 import java.io.File;
 import java.io.IOException;

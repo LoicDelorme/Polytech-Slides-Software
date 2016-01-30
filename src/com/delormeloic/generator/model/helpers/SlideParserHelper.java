@@ -1,4 +1,4 @@
-package com.delormeloic.generator.model.helpers.parsers;
+package com.delormeloic.generator.model.helpers;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;

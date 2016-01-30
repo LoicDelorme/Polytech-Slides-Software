@@ -6,10 +6,12 @@ import java.util.List;
 
 import com.delormeloic.generator.controller.helpers.SlideFormParserHelper;
 import com.delormeloic.generator.model.IModel;
+import com.delormeloic.generator.model.slides.Background;
 import com.delormeloic.generator.model.slides.Footer;
 import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.model.slides.Slide;
 import com.delormeloic.generator.view.IView;
+import com.delormeloic.generator.view.slidesforms.BackgroundForm;
 import com.delormeloic.generator.view.slidesforms.FooterForm;
 import com.delormeloic.generator.view.slidesforms.HeaderForm;
 import com.delormeloic.generator.view.slidesforms.SlideForm;
@@ -146,11 +148,11 @@ public class BasicController implements IController
 	}
 
 	/**
-	 * @see com.delormeloic.generator.controller.IController#notifySetData(com.delormeloic.generator.model.slides.Header, com.delormeloic.generator.model.slides.Footer, java.util.List)
+	 * @see com.delormeloic.generator.controller.IController#notifySetData(com.delormeloic.generator.model.slides.Header, com.delormeloic.generator.model.slides.Footer, com.delormeloic.generator.model.slides.Background, java.util.List)
 	 */
 	@Override
-	public void notifySetData(Header header, Footer footer, List<Slide> slides)
+	public void notifySetData(Header header, Footer footer, Background background, List<Slide> slides)
 	{
-		this.view.setData(new HeaderForm(header), new FooterForm(footer), SlideFormParserHelper.parseSlidesForms(slides));
+		this.view.setData(new HeaderForm(header), new FooterForm(footer), new BackgroundForm(background), SlideFormParserHelper.parseSlidesForms(slides));
 	}
 }

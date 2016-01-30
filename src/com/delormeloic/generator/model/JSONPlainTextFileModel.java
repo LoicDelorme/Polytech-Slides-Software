@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import com.delormeloic.generator.controller.IController;
 import com.delormeloic.generator.model.helpers.SlideParserHelper;
+import com.delormeloic.generator.model.slides.Background;
 import com.delormeloic.generator.model.slides.Footer;
 import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.model.slides.Slide;
@@ -28,6 +29,11 @@ public class JSONPlainTextFileModel extends PlainTextFileModel
 	 * The footer attribute.
 	 */
 	public static final String FOOTER_ATTRIBUTE = "footer";
+
+	/**
+	 * The background attribute.
+	 */
+	public static final String BACKGROUND_ATTRIBUTE = "background";
 
 	/**
 	 * The slides attribute.
@@ -59,6 +65,7 @@ public class JSONPlainTextFileModel extends PlainTextFileModel
 		final JSONObject parsedData = new JSONObject(data);
 		this.header = new Header(parsedData.getJSONObject(HEADER_ATTRIBUTE));
 		this.footer = new Footer(parsedData.getJSONObject(FOOTER_ATTRIBUTE));
+		this.background = new Background(parsedData.getJSONObject(BACKGROUND_ATTRIBUTE));
 		this.slides = new ArrayList<Slide>(SlideParserHelper.parseSlides(parsedData.getJSONArray(SLIDES_ATTRIBUTE)));
 	}
 
@@ -77,6 +84,7 @@ public class JSONPlainTextFileModel extends PlainTextFileModel
 		final JSONObject serializedData = new JSONObject();
 		serializedData.put(HEADER_ATTRIBUTE, this.header.toJSON());
 		serializedData.put(FOOTER_ATTRIBUTE, this.footer.toJSON());
+		serializedData.put(BACKGROUND_ATTRIBUTE, this.background.toJSON());
 		serializedData.put(SLIDES_ATTRIBUTE, slidesData);
 
 		return serializedData.toString(INDENT_FACTOR);

@@ -3,10 +3,12 @@ package com.delormeloic.generator.view;
 import java.lang.reflect.InvocationTargetException;
 
 import com.delormeloic.generator.model.slides.Slide;
-import com.delormeloic.generator.model.slides.SlideWithSpeech;
+import com.delormeloic.generator.model.slides.SlideWithSpeechWithImage;
+import com.delormeloic.generator.model.slides.SlideWithSpeechWithMovie;
 import com.delormeloic.generator.model.slides.SlideWithTitle;
 import com.delormeloic.generator.view.slidesforms.SlideForm;
-import com.delormeloic.generator.view.slidesforms.SlideWithSpeechForm;
+import com.delormeloic.generator.view.slidesforms.SlideWithSpeechWithImageForm;
+import com.delormeloic.generator.view.slidesforms.SlideWithSpeechWithMovieForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithTitleForm;
 import com.delormeloic.utils.logger.Logger;
 
@@ -24,9 +26,14 @@ public enum SlideType
 	SLIDE_WITH_TITLE("/com/delormeloic/generator/view/resources/images/slide_with_title.png", SlideWithTitle.class, SlideWithTitleForm.class),
 
 	/**
-	 * A slide with a speech.
+	 * A slide with a speech with an image.
 	 */
-	SLIDE_WITH_SPEECH("/com/delormeloic/generator/view/resources/images/slide_with_speech.png", SlideWithSpeech.class, SlideWithSpeechForm.class);
+	SLIDE_WITH_SPEECH_WITH_IMAGE("/com/delormeloic/generator/view/resources/images/slide_with_speech_with_image.png", SlideWithSpeechWithImage.class, SlideWithSpeechWithImageForm.class),
+
+	/**
+	 * A slide with a speech with a movie.
+	 */
+	SLIDE_WITH_SPEECH_WITH_MOVIE("/com/delormeloic/generator/view/resources/images/slide_with_speech_with_movie.png", SlideWithSpeechWithMovie.class, SlideWithSpeechWithMovieForm.class);
 
 	/**
 	 * The image path.

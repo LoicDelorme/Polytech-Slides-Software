@@ -3,6 +3,7 @@ package com.delormeloic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.UUID;
 
 import com.delormeloic.generator.controller.BasicController;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
  * @author DELORME Loïc
  * @since 1.0.0
  */
-public class Launcher extends Application
+public class Launcher extends Application implements UncaughtExceptionHandler
 {
 	/**
 	 * The entry of the application.
@@ -44,7 +45,7 @@ public class Launcher extends Application
 			Logger.severe(e);
 		}
 
-		launch(args);
+		Application.launch(args);
 	}
 
 	/**
@@ -53,6 +54,7 @@ public class Launcher extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
+		Thread.setDefaultUncaughtExceptionHandler(this);
 		final Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
 
 		final IController controller = new BasicController();
@@ -63,5 +65,14 @@ public class Launcher extends Application
 		controller.bindView(view);
 
 		view.showWindow();
+	}
+
+	/**
+	 * @see java.lang.Thread.UncaughtExceptionHandler#uncaughtException(java.lang.Thread, java.lang.Throwable)
+	 */
+	@Override
+	public void uncaughtException(Thread t, Throwable e)
+	{
+		Logger.severe(new Exception(e));
 	}
 }

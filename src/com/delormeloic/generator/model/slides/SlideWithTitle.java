@@ -29,7 +29,7 @@ public class SlideWithTitle extends Slide
 	public static final String HEADER_ATTRIBUTE = "header";
 
 	/**
-	 * The header attribute.
+	 * The footer attribute.
 	 */
 	public static final String FOOTER_ATTRIBUTE = "footer";
 

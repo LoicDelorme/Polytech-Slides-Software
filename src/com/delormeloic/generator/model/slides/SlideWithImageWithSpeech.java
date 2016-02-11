@@ -11,17 +11,17 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.text.Font;
 
 /**
- * This class represents a slide with an image with a title with a text.
+ * This class represents a slide with an image with a speech.
  * 
  * @author DELORME Loïc
  * @since 1.0.0
  */
-public class SlideWithImageWithTitleWithText extends Slide
+public class SlideWithImageWithSpeech extends Slide
 {
 	/**
 	 * The class for name.
 	 */
-	public static final String CLASS_FOR_NAME = "SlideWithImageWithTitleWithText";
+	public static final String CLASS_FOR_NAME = "SlideWithImageWithSpeech";
 
 	/**
 	 * The header attribute.
@@ -39,24 +39,14 @@ public class SlideWithImageWithTitleWithText extends Slide
 	public static final String IMAGE_ATTRIBUTE = "image";
 
 	/**
-	 * The title attribute.
+	 * The speech attribute.
 	 */
-	public static final String TITLE_ATTRIBUTE = "title";
+	public static final String SPEECH_ATTRIBUTE = "speech";
 
 	/**
-	 * The title font attribute.
+	 * The speech font attribute.
 	 */
-	public static final String TITLE_FONT_ATTRIBUTE = "titleFont";
-
-	/**
-	 * The text attribute.
-	 */
-	public static final String TEXT_ATTRIBUTE = "text";
-
-	/**
-	 * The text font attribute.
-	 */
-	public static final String TEXT_FONT_ATTRIBUTE = "textFont";
+	public static final String SPEECH_FONT_ATTRIBUTE = "speechFont";
 
 	/**
 	 * The header.
@@ -74,61 +64,47 @@ public class SlideWithImageWithTitleWithText extends Slide
 	private final StringProperty image;
 
 	/**
-	 * The title.
+	 * The speech.
 	 */
-	private final StringProperty title;
+	private final StringProperty speech;
 
 	/**
-	 * The title font.
+	 * The speech font.
 	 */
-	private final ObjectProperty<Font> titleFont;
+	private final ObjectProperty<Font> speechFont;
 
 	/**
-	 * The text.
-	 */
-	private final StringProperty text;
-
-	/**
-	 * The text font.
-	 */
-	private final ObjectProperty<Font> textFont;
-
-	/**
-	 * Create a slide with an image with a title with a text.
+	 * Create a slide with an image with a speech.
 	 * 
 	 * @param name
 	 *            The name.
 	 * @param data
 	 *            The data.
 	 */
-	public SlideWithImageWithTitleWithText(String name, JSONObject data)
+	public SlideWithImageWithSpeech(String name, JSONObject data)
 	{
 		super(CLASS_FOR_NAME, name);
 		this.header = new SimpleBooleanProperty(data.getBoolean(HEADER_ATTRIBUTE));
 		this.footer = new SimpleBooleanProperty(data.getBoolean(FOOTER_ATTRIBUTE));
 		this.image = new SimpleStringProperty(data.getString(IMAGE_ATTRIBUTE));
-		this.title = new SimpleStringProperty(data.getString(TITLE_ATTRIBUTE));
-		this.titleFont = new SimpleObjectProperty<Font>(new Font(data.getString(TITLE_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
-		this.text = new SimpleStringProperty(data.getString(TEXT_ATTRIBUTE));
-		this.textFont = new SimpleObjectProperty<Font>(new Font(data.getString(TEXT_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
+		this.speech = new SimpleStringProperty(data.getString(SPEECH_ATTRIBUTE));
+		this.speechFont = new SimpleObjectProperty<Font>(new Font(data.getString(SPEECH_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
 	}
 
 	/**
-	 * Create a slide with an image with a title with a text.
+	 * Create a slide with an image with a speech.
 	 * 
 	 * @param name
 	 *            The name.
 	 */
-	public SlideWithImageWithTitleWithText(String name)
+	public SlideWithImageWithSpeech(String name)
 	{
 		super(CLASS_FOR_NAME, name);
 		this.header = new SimpleBooleanProperty(IConstants.DEFAULT_HEADER_VALUE);
 		this.footer = new SimpleBooleanProperty(IConstants.DEFAULT_FOOTER_VALUE);
 		this.image = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
-		this.title = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
-		this.titleFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
-		this.text = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
-		this.textFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
+		this.speech = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
+		this.speechFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
 	}
 
 	/**
@@ -192,83 +168,43 @@ public class SlideWithImageWithTitleWithText extends Slide
 	}
 
 	/**
-	 * Get the title.
+	 * Get the speech.
 	 * 
-	 * @return The title.
+	 * @return The speech.
 	 */
-	public String getTitle()
+	public String getSpeech()
 	{
-		return this.title.get();
+		return this.speech.get();
 	}
 
 	/**
-	 * Get the title property.
+	 * Get the speech property.
 	 * 
-	 * @return The title property.
+	 * @return The speech property.
 	 */
-	public StringProperty getTitleProperty()
+	public StringProperty getSpeechProperty()
 	{
-		return this.title;
+		return this.speech;
 	}
 
 	/**
-	 * Get the title font.
+	 * Get the speech font.
 	 * 
-	 * @return The title font.
+	 * @return The speech font.
 	 */
-	public Font getTitleFont()
+	public Font getSpeechFont()
 	{
-		return this.titleFont.get();
+		return this.speechFont.get();
 	}
 
 	/**
-	 * Get the title font property.
+	 * Get the speech font property.
 	 * 
-	 * @return The title font property.
+	 * @return The speech font property.
 	 */
-	public ObjectProperty<Font> getTitleFontProperty()
+	public ObjectProperty<Font> getSpeechFontProperty()
 	{
-		return this.titleFont;
-	}
-
-	/**
-	 * Get the text.
-	 * 
-	 * @return The text.
-	 */
-	public String getText()
-	{
-		return this.text.get();
-	}
-
-	/**
-	 * Get the text property.
-	 * 
-	 * @return The text property.
-	 */
-	public StringProperty getTextProperty()
-	{
-		return this.text;
-	}
-
-	/**
-	 * Get the text font.
-	 * 
-	 * @return The text font.
-	 */
-	public Font getTextFont()
-	{
-		return this.textFont.get();
-	}
-
-	/**
-	 * Get the text font property.
-	 * 
-	 * @return The text font property.
-	 */
-	public ObjectProperty<Font> getTextFontProperty()
-	{
-		return this.textFont;
+		return this.speechFont;
 	}
 
 	/**
@@ -281,10 +217,8 @@ public class SlideWithImageWithTitleWithText extends Slide
 		data.put(HEADER_ATTRIBUTE, getHeader());
 		data.put(FOOTER_ATTRIBUTE, getFooter());
 		data.put(IMAGE_ATTRIBUTE, getImage());
-		data.put(TITLE_ATTRIBUTE, getTitle());
-		data.put(TITLE_FONT_ATTRIBUTE, getTitleFont().getName());
-		data.put(TEXT_ATTRIBUTE, getText());
-		data.put(TEXT_FONT_ATTRIBUTE, getTextFont().getName());
+		data.put(SPEECH_ATTRIBUTE, getSpeech());
+		data.put(SPEECH_FONT_ATTRIBUTE, getSpeechFont().getName());
 
 		return data;
 	}

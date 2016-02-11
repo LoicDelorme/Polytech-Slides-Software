@@ -3,13 +3,13 @@ package com.delormeloic.generator.view.slidesforms;
 import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.view.converters.FontStringConverter;
 import com.delormeloic.generator.view.helpers.FontsHelper;
-import com.delormeloic.generator.view.helpers.GridPaneHelper;
+import com.delormeloic.generator.view.helpers.FormBuilderHelper;
 import com.delormeloic.generator.view.helpers.TextHelper;
 
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.text.Font;
 
 /**
@@ -43,18 +43,20 @@ public class HeaderForm implements IFormable
 	public Node toForm()
 	{
 		final TextField middleTextTextField = new TextField();
-		final ComboBox<Font> middleTextFontComboBox = new ComboBox<Font>();
-
-		middleTextFontComboBox.getItems().addAll(FontsHelper.getAllAvailableFonts());
-		middleTextFontComboBox.setConverter(new FontStringConverter());
-
 		middleTextTextField.textProperty().bindBidirectional(this.header.getMiddleTextProperty());
+
+		final ComboBox<Font> middleTextFontComboBox = new ComboBox<Font>(FontsHelper.getAllAvailableFonts());
+		middleTextFontComboBox.setConverter(new FontStringConverter());
 		middleTextFontComboBox.valueProperty().bindBidirectional(this.header.getMiddleTextFontProperty());
 
-		final Node[] middleTextField = new Node[] { new Label(TextHelper.getText("headerFormMiddleTextField")), middleTextTextField };
-		final Node[] middleTextFontField = new Node[] { new Label(TextHelper.getText("headerFormMiddleTextFontField")), middleTextFontComboBox };
+		final TitledPane middleTextTitledPane = new TitledPane(TextHelper.getText("headerFormMiddleTextTitledPane"), middleTextTextField);
+		middleTextTitledPane.setCollapsible(false);
+		final TitledPane middleTextFontTitledPane = new TitledPane(TextHelper.getText("headerFormMiddleTextFontTitledPane"), middleTextFontComboBox);
+		middleTextFontTitledPane.setCollapsible(false);
 
-		return GridPaneHelper.buildGridPane(new Node[][] { middleTextField, middleTextFontField });
+		final TitledPane middleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("headerFormMiddleTitledPane"), new TitledPane[] { middleTextTitledPane, middleTextFontTitledPane });
+
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { middleTitledPane });
 	}
 
 	/**

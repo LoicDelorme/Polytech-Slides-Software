@@ -3,14 +3,14 @@ package com.delormeloic.generator.view.slidesforms;
 import com.delormeloic.generator.model.slides.SlideWithTitle;
 import com.delormeloic.generator.view.converters.FontStringConverter;
 import com.delormeloic.generator.view.helpers.FontsHelper;
-import com.delormeloic.generator.view.helpers.GridPaneHelper;
+import com.delormeloic.generator.view.helpers.FormBuilderHelper;
 import com.delormeloic.generator.view.helpers.TextHelper;
 
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.text.Font;
 
 /**
@@ -41,26 +41,35 @@ public class SlideWithTitleForm extends SlideForm
 		final SlideWithTitle slideWithTitle = (SlideWithTitle) this.slide;
 
 		final TextField nameTextField = new TextField();
-		final CheckBox headerCheckBox = new CheckBox();
-		final CheckBox footerCheckBox = new CheckBox();
-		final TextField titleTextField = new TextField();
-		final ComboBox<Font> titleFontComboBox = new ComboBox<Font>();
-
-		titleFontComboBox.getItems().addAll(FontsHelper.getAllAvailableFonts());
-		titleFontComboBox.setConverter(new FontStringConverter());
-
 		nameTextField.textProperty().bindBidirectional(slideWithTitle.getNameProperty());
+
+		final CheckBox headerCheckBox = new CheckBox();
 		headerCheckBox.selectedProperty().bindBidirectional(slideWithTitle.getHeaderProperty());
+
+		final CheckBox footerCheckBox = new CheckBox();
 		footerCheckBox.selectedProperty().bindBidirectional(slideWithTitle.getFooterProperty());
+
+		final TextField titleTextField = new TextField();
 		titleTextField.textProperty().bindBidirectional(slideWithTitle.getTitleProperty());
+
+		final ComboBox<Font> titleFontComboBox = new ComboBox<Font>(FontsHelper.getAllAvailableFonts());
+		titleFontComboBox.setConverter(new FontStringConverter());
 		titleFontComboBox.valueProperty().bindBidirectional(slideWithTitle.getTitleFontProperty());
 
-		final Node[] nameField = new Node[] { new Label(TextHelper.getText("slideWithTitleFormNameField")), nameTextField };
-		final Node[] headerField = new Node[] { new Label(TextHelper.getText("slideWithTitleFormHeaderField")), headerCheckBox };
-		final Node[] footerField = new Node[] { new Label(TextHelper.getText("slideWithTitleFormFooterField")), footerCheckBox };
-		final Node[] titleField = new Node[] { new Label(TextHelper.getText("slideWithTitleFormTitleField")), titleTextField };
-		final Node[] titleFontField = new Node[] { new Label(TextHelper.getText("slideWithTitleFormTitleFontField")), titleFontComboBox };
+		final TitledPane nameTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormNameTitledPane"), nameTextField);
+		nameTitledPane.setCollapsible(false);
+		final TitledPane headerTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormHeaderTitledPane"), headerCheckBox);
+		headerTitledPane.setCollapsible(false);
+		final TitledPane footerTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormFooterTitledPane"), footerCheckBox);
+		footerTitledPane.setCollapsible(false);
+		final TitledPane titleTextTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormTitleTextTitledPane"), titleTextField);
+		titleTextTitledPane.setCollapsible(false);
+		final TitledPane titleTextFontTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormTitleTextFontTitledPane"), titleFontComboBox);
+		titleTextFontTitledPane.setCollapsible(false);
 
-		return GridPaneHelper.buildGridPane(new Node[][] { nameField, GridPaneHelper.getSeparators(2), headerField, footerField, GridPaneHelper.getSeparators(2), titleField, titleFontField });
+		final TitledPane generalInformationTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithTitleFormGeneralInformationTitledPane"), new TitledPane[] { nameTitledPane, headerTitledPane, footerTitledPane });
+		final TitledPane titleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithTitleFormTitleTitledPane"), new TitledPane[] { titleTextTitledPane, titleTextFontTitledPane });
+
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { generalInformationTitledPane, titleTitledPane });
 	}
 }

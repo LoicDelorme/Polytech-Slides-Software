@@ -146,16 +146,16 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 		this.slideFormPane.setPadding(new Insets(8, 10, 8, 8));
 
 		final Region region = new Region();
-		final HBox slidesFormsButtonsHBox = new HBox();
-		slidesFormsButtonsHBox.setAlignment(Pos.CENTER_LEFT);
-		slidesFormsButtonsHBox.getChildren().addAll(this.addSlideButton, this.removeSlideButton, region, this.moveUpSlideButton, this.moveDownSlideButton);
+		final HBox buttonsHBox = new HBox();
+		buttonsHBox.setAlignment(Pos.CENTER_LEFT);
+		buttonsHBox.getChildren().addAll(this.addSlideButton, this.removeSlideButton, region, this.moveUpSlideButton, this.moveDownSlideButton);
 		HBox.setHgrow(region, Priority.ALWAYS);
 
 		final VBox dataVBox = new VBox();
 		dataVBox.setAlignment(Pos.CENTER);
 		dataVBox.setSpacing(5);
 		dataVBox.setPadding(new Insets(8, 10, 8, 8));
-		dataVBox.getChildren().addAll(this.formables, this.slidesForms, slidesFormsButtonsHBox);
+		dataVBox.getChildren().addAll(this.formables, this.slidesForms, buttonsHBox);
 		VBox.setVgrow(this.slidesForms, Priority.ALWAYS);
 
 		this.setTop(this.menuBar);

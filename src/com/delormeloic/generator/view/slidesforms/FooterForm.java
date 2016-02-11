@@ -6,7 +6,7 @@ import com.delormeloic.generator.model.slides.Footer;
 import com.delormeloic.generator.view.converters.FontStringConverter;
 import com.delormeloic.generator.view.helpers.Base64Helper;
 import com.delormeloic.generator.view.helpers.FontsHelper;
-import com.delormeloic.generator.view.helpers.GridPaneHelper;
+import com.delormeloic.generator.view.helpers.FormBuilderHelper;
 import com.delormeloic.generator.view.helpers.TextHelper;
 
 import javafx.event.ActionEvent;
@@ -14,8 +14,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
@@ -60,24 +60,32 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 	public Node toForm()
 	{
 		this.leftImageButton = new Button(TextHelper.getText("footerFormLeftImageButton"));
-		final TextField middleTextTextField = new TextField();
-		final ComboBox<Font> middleTextFontComboBox = new ComboBox<Font>();
-		this.rightImageButton = new Button(TextHelper.getText("footerFormRightImageButton"));
-
 		this.leftImageButton.setOnAction(this);
-		middleTextFontComboBox.getItems().addAll(FontsHelper.getAllAvailableFonts());
-		middleTextFontComboBox.setConverter(new FontStringConverter());
-		this.rightImageButton.setOnAction(this);
 
+		final TextField middleTextTextField = new TextField();
 		middleTextTextField.textProperty().bindBidirectional(this.footer.getMiddleTextProperty());
+
+		final ComboBox<Font> middleTextFontComboBox = new ComboBox<Font>(FontsHelper.getAllAvailableFonts());
+		middleTextFontComboBox.setConverter(new FontStringConverter());
 		middleTextFontComboBox.valueProperty().bindBidirectional(this.footer.getMiddleTextFontProperty());
 
-		final Node[] leftImageField = new Node[] { new Label(TextHelper.getText("footerFormLeftImageField")), this.leftImageButton };
-		final Node[] middleTextField = new Node[] { new Label(TextHelper.getText("footerFormMiddleTextField")), middleTextTextField };
-		final Node[] middleTextFontField = new Node[] { new Label(TextHelper.getText("footerFormMiddleTextFontField")), middleTextFontComboBox };
-		final Node[] rightImageField = new Node[] { new Label(TextHelper.getText("footerFormRightImageField")), this.rightImageButton };
+		this.rightImageButton = new Button(TextHelper.getText("footerFormRightImageButton"));
+		this.rightImageButton.setOnAction(this);
 
-		return GridPaneHelper.buildGridPane(new Node[][] { leftImageField, GridPaneHelper.getSeparators(2), middleTextField, middleTextFontField, GridPaneHelper.getSeparators(2), rightImageField });
+		final TitledPane leftImageTitledPane = new TitledPane(TextHelper.getText("footerFormLeftImageTitledPane"), this.leftImageButton);
+		leftImageTitledPane.setCollapsible(false);
+		final TitledPane middleTextTitledPane = new TitledPane(TextHelper.getText("footerFormMiddleTextTitledPane"), middleTextTextField);
+		middleTextTitledPane.setCollapsible(false);
+		final TitledPane middleTextFontTitledPane = new TitledPane(TextHelper.getText("footerFormMiddleTextFontTitledPane"), middleTextFontComboBox);
+		middleTextFontTitledPane.setCollapsible(false);
+		final TitledPane rightImageTitledPane = new TitledPane(TextHelper.getText("footerFormRightImageTitledPane"), this.rightImageButton);
+		rightImageTitledPane.setCollapsible(false);
+
+		final TitledPane leftTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("footerFormLeftTitledPane"), new TitledPane[] { leftImageTitledPane });
+		final TitledPane middleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("footerFormMiddleTitledPane"), new TitledPane[] { middleTextTitledPane, middleTextFontTitledPane });
+		final TitledPane rightTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("footerFormRightTitledPane"), new TitledPane[] { rightImageTitledPane });
+
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { leftTitledPane, middleTitledPane, rightTitledPane });
 	}
 
 	/**

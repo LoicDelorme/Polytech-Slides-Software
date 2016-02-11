@@ -6,7 +6,7 @@ import com.delormeloic.generator.model.slides.SlideWithSpeechWithImage;
 import com.delormeloic.generator.view.converters.FontStringConverter;
 import com.delormeloic.generator.view.helpers.Base64Helper;
 import com.delormeloic.generator.view.helpers.FontsHelper;
-import com.delormeloic.generator.view.helpers.GridPaneHelper;
+import com.delormeloic.generator.view.helpers.FormBuilderHelper;
 import com.delormeloic.generator.view.helpers.TextHelper;
 
 import javafx.event.ActionEvent;
@@ -15,9 +15,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
@@ -54,39 +54,54 @@ public class SlideWithSpeechWithImageForm extends SlideForm implements EventHand
 		final SlideWithSpeechWithImage slideWithSpeechWithImage = (SlideWithSpeechWithImage) this.slide;
 
 		final TextField nameTextField = new TextField();
-		final CheckBox headerCheckBox = new CheckBox();
-		final CheckBox footerCheckBox = new CheckBox();
-		final TextField titleTextField = new TextField();
-		final ComboBox<Font> titleFontComboBox = new ComboBox<Font>();
-		final TextArea speechTextArea = new TextArea();
-		final ComboBox<Font> speechFontComboBox = new ComboBox<Font>();
-		this.imageButton = new Button(TextHelper.getText("slideWithSpeechWithImageFormImageButton"));
-
-		titleFontComboBox.getItems().addAll(FontsHelper.getAllAvailableFonts());
-		titleFontComboBox.setConverter(new FontStringConverter());
-		speechTextArea.setWrapText(true);
-		speechFontComboBox.getItems().addAll(FontsHelper.getAllAvailableFonts());
-		speechFontComboBox.setConverter(new FontStringConverter());
-		this.imageButton.setOnAction(this);
-
 		nameTextField.textProperty().bindBidirectional(slideWithSpeechWithImage.getNameProperty());
+
+		final CheckBox headerCheckBox = new CheckBox();
 		headerCheckBox.selectedProperty().bindBidirectional(slideWithSpeechWithImage.getHeaderProperty());
+
+		final CheckBox footerCheckBox = new CheckBox();
 		footerCheckBox.selectedProperty().bindBidirectional(slideWithSpeechWithImage.getFooterProperty());
+
+		final TextField titleTextField = new TextField();
 		titleTextField.textProperty().bindBidirectional(slideWithSpeechWithImage.getTitleProperty());
+
+		final ComboBox<Font> titleFontComboBox = new ComboBox<Font>(FontsHelper.getAllAvailableFonts());
+		titleFontComboBox.setConverter(new FontStringConverter());
 		titleFontComboBox.valueProperty().bindBidirectional(slideWithSpeechWithImage.getTitleFontProperty());
+
+		final TextArea speechTextArea = new TextArea();
+		speechTextArea.setWrapText(true);
 		speechTextArea.textProperty().bindBidirectional(slideWithSpeechWithImage.getSpeechProperty());
+
+		final ComboBox<Font> speechFontComboBox = new ComboBox<Font>(FontsHelper.getAllAvailableFonts());
+		speechFontComboBox.setConverter(new FontStringConverter());
 		speechFontComboBox.valueProperty().bindBidirectional(slideWithSpeechWithImage.getSpeechFontProperty());
 
-		final Node[] nameField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormNameField")), nameTextField };
-		final Node[] headerField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormHeaderField")), headerCheckBox };
-		final Node[] footerField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormFooterField")), footerCheckBox };
-		final Node[] titleField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormTitleField")), titleTextField };
-		final Node[] titleFontField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormTitleFontField")), titleFontComboBox };
-		final Node[] speechField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormSpeechField")), speechTextArea };
-		final Node[] speechFontField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormSpeechFontField")), speechFontComboBox };
-		final Node[] imageButtonField = new Node[] { new Label(TextHelper.getText("slideWithSpeechWithImageFormImageButtonField")), this.imageButton };
+		this.imageButton = new Button(TextHelper.getText("slideWithSpeechWithImageFormImageButton"));
+		this.imageButton.setOnAction(this);
 
-		return GridPaneHelper.buildGridPane(new Node[][] { nameField, GridPaneHelper.getSeparators(2), headerField, footerField, GridPaneHelper.getSeparators(2), titleField, titleFontField, GridPaneHelper.getSeparators(2), speechField, speechFontField, GridPaneHelper.getSeparators(2), imageButtonField });
+		final TitledPane nameTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormNameTitledPane"), nameTextField);
+		nameTitledPane.setCollapsible(false);
+		final TitledPane headerTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormHeaderTitledPane"), headerCheckBox);
+		headerTitledPane.setCollapsible(false);
+		final TitledPane footerTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormFooterTitledPane"), footerCheckBox);
+		footerTitledPane.setCollapsible(false);
+		final TitledPane titleTextTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormTitleTextTitledPane"), titleTextField);
+		titleTextTitledPane.setCollapsible(false);
+		final TitledPane titleTextFontTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormTitleTextFontTitledPane"), titleFontComboBox);
+		titleTextFontTitledPane.setCollapsible(false);
+		final TitledPane speechTextTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormSpeechTextTitledPane"), speechTextArea);
+		speechTextTitledPane.setCollapsible(false);
+		final TitledPane speechTextFontTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormSpeechTextFontTitledPane"), speechFontComboBox);
+		speechTextFontTitledPane.setCollapsible(false);
+		final TitledPane imageButtonTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithImageFormImageButtonTitledPane"), this.imageButton);
+		nameTitledPane.setCollapsible(false);
+
+		final TitledPane generalInformationTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithImageFormGeneralInformationTitledPane"), new TitledPane[] { nameTitledPane, headerTitledPane, footerTitledPane });
+		final TitledPane titleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithImageFormTitleTitledPane"), new TitledPane[] { titleTextTitledPane, titleTextFontTitledPane });
+		final TitledPane speechTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithImageFormSpeechTitledPane"), new TitledPane[] { speechTextTitledPane, speechTextFontTitledPane, imageButtonTitledPane });
+
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { generalInformationTitledPane, titleTitledPane, speechTitledPane });
 	}
 
 	/**

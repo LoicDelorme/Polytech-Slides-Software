@@ -1,12 +1,12 @@
 package com.delormeloic.generator.view.slidesforms;
 
 import com.delormeloic.generator.model.slides.Background;
-import com.delormeloic.generator.view.helpers.GridPaneHelper;
+import com.delormeloic.generator.view.helpers.FormBuilderHelper;
 import com.delormeloic.generator.view.helpers.TextHelper;
 
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 
 /**
  * This class represents a background form.
@@ -39,12 +39,14 @@ public class BackgroundForm implements IFormable
 	public Node toForm()
 	{
 		final ColorPicker backgroundColorPicker = new ColorPicker();
-
 		backgroundColorPicker.valueProperty().bindBidirectional(this.background.getBackgroundColorProperty());
 
-		final Node[] backgroundColorField = new Node[] { new Label(TextHelper.getText("backgroundFormBackgroundColorField")), backgroundColorPicker };
+		final TitledPane backgroundColorTitledPane = new TitledPane(TextHelper.getText("backgroundFormBackgroundColorTitledPane"), backgroundColorPicker);
+		backgroundColorTitledPane.setCollapsible(false);
 
-		return GridPaneHelper.buildGridPane(new Node[][] { backgroundColorField });
+		final TitledPane backgroundTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("backgroundFormBackgroundTitledPane"), new TitledPane[] { backgroundColorTitledPane });
+
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { backgroundTitledPane });
 	}
 
 	/**

@@ -29,7 +29,7 @@ public interface IConstants
 	/**
 	 * The default footer value.
 	 */
-	public static final boolean DEFAULT_FOOTER_VALUE = false;
+	public static final boolean DEFAULT_FOOTER_VALUE = true;
 
 	/**
 	 * The default text.

@@ -79,6 +79,11 @@ public abstract class SlideWithSpeechWithContent extends Slide
 	private final ObjectProperty<Font> speechFont;
 
 	/**
+	 * The content.
+	 */
+	private final StringProperty content;
+
+	/**
 	 * Create a slide with a speech with a content.
 	 * 
 	 * @param classForName
@@ -97,6 +102,7 @@ public abstract class SlideWithSpeechWithContent extends Slide
 		this.titleFont = new SimpleObjectProperty<Font>(new Font(data.getString(TITLE_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
 		this.speech = new SimpleStringProperty(data.getString(SPEECH_ATTRIBUTE));
 		this.speechFont = new SimpleObjectProperty<Font>(new Font(data.getString(SPEECH_FONT_ATTRIBUTE), IConstants.DEFAULT_FONT_SIZE));
+		this.content = new SimpleStringProperty(data.getString(getContentAttribute()));
 	}
 
 	/**
@@ -116,6 +122,7 @@ public abstract class SlideWithSpeechWithContent extends Slide
 		this.titleFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
 		this.speech = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 		this.speechFont = new SimpleObjectProperty<Font>(IConstants.DEFAULT_FONT);
+		this.content = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 	}
 
 	/**
@@ -239,18 +246,31 @@ public abstract class SlideWithSpeechWithContent extends Slide
 	}
 
 	/**
+	 * Get the content.
+	 * 
+	 * @return The content.
+	 */
+	public String getContent()
+	{
+		return this.content.get();
+	}
+
+	/**
+	 * Get the content property.
+	 * 
+	 * @return The content property.
+	 */
+	public StringProperty getContentProperty()
+	{
+		return this.content;
+	}
+
+	/**
 	 * Get the content attribute.
 	 * 
 	 * @return The content attribute.
 	 */
 	public abstract String getContentAttribute();
-
-	/**
-	 * Get the content value.
-	 * 
-	 * @return The content value.
-	 */
-	public abstract String getContentValue();
 
 	/**
 	 * @see com.delormeloic.generator.model.slides.Slide#getData()
@@ -265,7 +285,7 @@ public abstract class SlideWithSpeechWithContent extends Slide
 		data.put(TITLE_FONT_ATTRIBUTE, getTitleFont().getName());
 		data.put(SPEECH_ATTRIBUTE, getSpeech());
 		data.put(SPEECH_FONT_ATTRIBUTE, getSpeechFont().getName());
-		data.put(getContentAttribute(), getContentValue());
+		data.put(getContentAttribute(), getContent());
 
 		return data;
 	}

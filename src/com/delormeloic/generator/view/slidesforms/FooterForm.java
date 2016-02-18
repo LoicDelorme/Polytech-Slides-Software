@@ -16,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
@@ -28,9 +30,19 @@ import javafx.stage.FileChooser;
 public class FooterForm implements IFormable, EventHandler<ActionEvent>
 {
 	/**
+	 * The left image text field.
+	 */
+	private TextField leftImageTextField;
+
+	/**
 	 * The left image button.
 	 */
 	private Button leftImageButton;
+
+	/**
+	 * The right image text field.
+	 */
+	private TextField rightImageTextField;
 
 	/**
 	 * The right image button.
@@ -59,6 +71,9 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 	@Override
 	public Node toForm()
 	{
+		this.leftImageTextField = new TextField(String.format(TextHelper.getText("imagesLoaded"), (this.footer.getLeftImage().isEmpty() ? 0 : 1)));
+		this.leftImageTextField.setEditable(false);
+
 		this.leftImageButton = new Button(TextHelper.getText("footerFormLeftImageButton"));
 		this.leftImageButton.setOnAction(this);
 
@@ -69,17 +84,23 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 		middleTextFontComboBox.setConverter(new FontStringConverter());
 		middleTextFontComboBox.valueProperty().bindBidirectional(this.footer.getMiddleTextFontProperty());
 
+		this.rightImageTextField = new TextField(String.format(TextHelper.getText("imagesLoaded"), (this.footer.getRightImage().isEmpty() ? 0 : 1)));
+		this.rightImageTextField.setEditable(false);
+
 		this.rightImageButton = new Button(TextHelper.getText("footerFormRightImageButton"));
 		this.rightImageButton.setOnAction(this);
 
-		final TitledPane leftImageTitledPane = new TitledPane(TextHelper.getText("footerFormLeftImageTitledPane"), this.leftImageButton);
+		final TitledPane leftImageTitledPane = new TitledPane(TextHelper.getText("footerFormLeftImageTitledPane"), new HBox(this.leftImageTextField, this.leftImageButton));
 		leftImageTitledPane.setCollapsible(false);
-		final TitledPane middleTextTitledPane = new TitledPane(TextHelper.getText("footerFormMiddleTextTitledPane"), middleTextTextField);
+		HBox.setHgrow(this.leftImageTextField, Priority.ALWAYS);
+		final TitledPane middleTextTitledPane = new TitledPane(TextHelper.getText("footerFormMiddleTextTitledPane"), new HBox(middleTextTextField));
 		middleTextTitledPane.setCollapsible(false);
-		final TitledPane middleTextFontTitledPane = new TitledPane(TextHelper.getText("footerFormMiddleTextFontTitledPane"), middleTextFontComboBox);
+		HBox.setHgrow(middleTextTextField, Priority.ALWAYS);
+		final TitledPane middleTextFontTitledPane = new TitledPane(TextHelper.getText("footerFormMiddleTextFontTitledPane"), new HBox(middleTextFontComboBox));
 		middleTextFontTitledPane.setCollapsible(false);
-		final TitledPane rightImageTitledPane = new TitledPane(TextHelper.getText("footerFormRightImageTitledPane"), this.rightImageButton);
+		final TitledPane rightImageTitledPane = new TitledPane(TextHelper.getText("footerFormRightImageTitledPane"), new HBox(this.rightImageTextField, this.rightImageButton));
 		rightImageTitledPane.setCollapsible(false);
+		HBox.setHgrow(this.rightImageTextField, Priority.ALWAYS);
 
 		final TitledPane leftTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("footerFormLeftTitledPane"), new TitledPane[] { leftImageTitledPane });
 		final TitledPane middleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("footerFormMiddleTitledPane"), new TitledPane[] { middleTextTitledPane, middleTextFontTitledPane });
@@ -106,11 +127,13 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 			if (selectedButton == this.leftImageButton)
 			{
 				this.footer.getLeftImageProperty().set(encodedData);
+				this.leftImageTextField.setText(String.format(TextHelper.getText("imagesLoaded"), 1));
 			}
 
 			if (selectedButton == this.rightImageButton)
 			{
 				this.footer.getRightImageProperty().set(encodedData);
+				this.rightImageTextField.setText(String.format(TextHelper.getText("imagesLoaded"), 1));
 			}
 		}
 	}

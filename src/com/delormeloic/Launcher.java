@@ -3,6 +3,7 @@ package com.delormeloic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import com.delormeloic.generator.controller.BasicController;
@@ -37,7 +38,10 @@ public class Launcher extends Application
 	{
 		try
 		{
-			Logger.setDefaultPrintWriter(new PrintWriter(new File("log/" + UUID.randomUUID().toString())));
+			final StringBuilder filePath = new StringBuilder().append("log/").append(LocalDate.now().toString()).append("_").append(UUID.randomUUID().toString());
+			final File file = new File(filePath.toString());
+			final PrintWriter filePrintWriter = new PrintWriter(file);
+			Logger.setDefaultPrintWriter(filePrintWriter);
 		}
 		catch (FileNotFoundException e)
 		{

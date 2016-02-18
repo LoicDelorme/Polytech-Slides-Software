@@ -2,9 +2,6 @@ package com.delormeloic.generator.model.slides;
 
 import org.json.JSONObject;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 /**
  * This class represents a slide with a speech with a movie.
  * 
@@ -24,11 +21,6 @@ public class SlideWithSpeechWithMovie extends SlideWithSpeechWithContent
 	public static final String MOVIE_ATTRIBUTE = "movie";
 
 	/**
-	 * The movie.
-	 */
-	private final StringProperty movie;
-
-	/**
 	 * Create a slide with a speech with a movie.
 	 * 
 	 * @param name
@@ -38,8 +30,7 @@ public class SlideWithSpeechWithMovie extends SlideWithSpeechWithContent
 	 */
 	public SlideWithSpeechWithMovie(String name, JSONObject data)
 	{
-		super(CLASS_FOR_NAME, name);
-		this.movie = new SimpleStringProperty(data.getString(MOVIE_ATTRIBUTE));
+		super(CLASS_FOR_NAME, name, data);
 	}
 
 	/**
@@ -51,27 +42,6 @@ public class SlideWithSpeechWithMovie extends SlideWithSpeechWithContent
 	public SlideWithSpeechWithMovie(String name)
 	{
 		super(CLASS_FOR_NAME, name);
-		this.movie = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
-	}
-
-	/**
-	 * Get the movie.
-	 * 
-	 * @return The movie.
-	 */
-	public String getMovie()
-	{
-		return this.movie.get();
-	}
-
-	/**
-	 * Get the movie property.
-	 * 
-	 * @return The movie property.
-	 */
-	public StringProperty getMovieProperty()
-	{
-		return this.movie;
 	}
 
 	/**
@@ -81,14 +51,5 @@ public class SlideWithSpeechWithMovie extends SlideWithSpeechWithContent
 	public String getContentAttribute()
 	{
 		return MOVIE_ATTRIBUTE;
-	}
-
-	/**
-	 * @see com.delormeloic.generator.model.slides.SlideWithSpeechWithContent#getContentValue()
-	 */
-	@Override
-	public String getContentValue()
-	{
-		return getMovie();
 	}
 }

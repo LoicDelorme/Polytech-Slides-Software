@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 
 /**
@@ -49,9 +51,10 @@ public class HeaderForm implements IFormable
 		middleTextFontComboBox.setConverter(new FontStringConverter());
 		middleTextFontComboBox.valueProperty().bindBidirectional(this.header.getMiddleTextFontProperty());
 
-		final TitledPane middleTextTitledPane = new TitledPane(TextHelper.getText("headerFormMiddleTextTitledPane"), middleTextTextField);
+		final TitledPane middleTextTitledPane = new TitledPane(TextHelper.getText("headerFormMiddleTextTitledPane"), new HBox(middleTextTextField));
 		middleTextTitledPane.setCollapsible(false);
-		final TitledPane middleTextFontTitledPane = new TitledPane(TextHelper.getText("headerFormMiddleTextFontTitledPane"), middleTextFontComboBox);
+		HBox.setHgrow(middleTextTextField, Priority.ALWAYS);
+		final TitledPane middleTextFontTitledPane = new TitledPane(TextHelper.getText("headerFormMiddleTextFontTitledPane"), new HBox(middleTextFontComboBox));
 		middleTextFontTitledPane.setCollapsible(false);
 
 		final TitledPane middleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("headerFormMiddleTitledPane"), new TitledPane[] { middleTextTitledPane, middleTextFontTitledPane });

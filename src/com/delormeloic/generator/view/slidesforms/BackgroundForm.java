@@ -7,6 +7,7 @@ import com.delormeloic.generator.view.helpers.TextHelper;
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.HBox;
 
 /**
  * This class represents a background form.
@@ -41,7 +42,7 @@ public class BackgroundForm implements IFormable
 		final ColorPicker backgroundColorPicker = new ColorPicker();
 		backgroundColorPicker.valueProperty().bindBidirectional(this.background.getBackgroundColorProperty());
 
-		final TitledPane backgroundColorTitledPane = new TitledPane(TextHelper.getText("backgroundFormBackgroundColorTitledPane"), backgroundColorPicker);
+		final TitledPane backgroundColorTitledPane = new TitledPane(TextHelper.getText("backgroundFormBackgroundColorTitledPane"), new HBox(backgroundColorPicker));
 		backgroundColorTitledPane.setCollapsible(false);
 
 		final TitledPane backgroundTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("backgroundFormBackgroundTitledPane"), new TitledPane[] { backgroundColorTitledPane });

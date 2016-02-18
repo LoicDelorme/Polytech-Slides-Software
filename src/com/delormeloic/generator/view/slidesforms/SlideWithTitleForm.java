@@ -11,6 +11,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 
 /**
@@ -56,15 +58,17 @@ public class SlideWithTitleForm extends SlideForm
 		titleFontComboBox.setConverter(new FontStringConverter());
 		titleFontComboBox.valueProperty().bindBidirectional(slideWithTitle.getTitleFontProperty());
 
-		final TitledPane nameTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormNameTitledPane"), nameTextField);
+		final TitledPane nameTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormNameTitledPane"), new HBox(nameTextField));
 		nameTitledPane.setCollapsible(false);
-		final TitledPane headerTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormHeaderTitledPane"), headerCheckBox);
+		HBox.setHgrow(nameTextField, Priority.ALWAYS);
+		final TitledPane headerTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormHeaderTitledPane"), new HBox(headerCheckBox));
 		headerTitledPane.setCollapsible(false);
-		final TitledPane footerTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormFooterTitledPane"), footerCheckBox);
+		final TitledPane footerTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormFooterTitledPane"), new HBox(footerCheckBox));
 		footerTitledPane.setCollapsible(false);
-		final TitledPane titleTextTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormTitleTextTitledPane"), titleTextField);
+		final TitledPane titleTextTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormTitleTextTitledPane"), new HBox(titleTextField));
 		titleTextTitledPane.setCollapsible(false);
-		final TitledPane titleTextFontTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormTitleTextFontTitledPane"), titleFontComboBox);
+		HBox.setHgrow(titleTextField, Priority.ALWAYS);
+		final TitledPane titleTextFontTitledPane = new TitledPane(TextHelper.getText("slideWithTitleFormTitleTextFontTitledPane"), new HBox(titleFontComboBox));
 		titleTextFontTitledPane.setCollapsible(false);
 
 		final TitledPane generalInformationTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithTitleFormGeneralInformationTitledPane"), new TitledPane[] { nameTitledPane, headerTitledPane, footerTitledPane });

@@ -26,21 +26,21 @@ public class SlideWithTitleWithSpeechWithImageForm extends SlideWithTitleWithSpe
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentLoadedText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentLoadedTextTextField()
 	 */
 	@Override
-	public String getContentLoadedText()
+	public String getContentLoadedTextTextField()
 	{
-		return TextHelper.getText("imagesLoaded");
+		return TextHelper.getText("slideFormImagesLoaded");
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentButtonText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentTitleTitledPane()
 	 */
 	@Override
-	public String getContentButtonText()
+	public String getContentTitleTitledPane()
 	{
-		return TextHelper.getText("slideWithSpeechWithImageFormImageButtonTitledPane");
+		return TextHelper.getText("slideWithSpeechWithImageFormImageTitleTitledPane");
 	}
 
 	/**

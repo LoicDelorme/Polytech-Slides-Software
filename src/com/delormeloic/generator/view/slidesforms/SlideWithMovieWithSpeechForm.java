@@ -26,25 +26,25 @@ public class SlideWithMovieWithSpeechForm extends SlideWithContentWithSpeechForm
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentLoadedText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithContentWithSpeechForm#getContentLoadedTextTextField()
 	 */
 	@Override
-	public String getContentLoadedText()
+	public String getContentLoadedTextTextField()
 	{
-		return TextHelper.getText("moviesLoaded");
+		return TextHelper.getText("slideFormMoviesLoaded");
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentButtonText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithContentWithSpeechForm#getContentTitleTitledPane()
 	 */
 	@Override
-	public String getContentButtonText()
+	public String getContentTitleTitledPane()
 	{
-		return TextHelper.getText("slideWithContentWithSpeechFormMovieButtonTitledPane");
+		return TextHelper.getText("slideWithContentWithSpeechFormMovieTitleTitledPane");
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getExtensionFilter()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithContentWithSpeechForm#getExtensionFilter()
 	 */
 	@Override
 	public ExtensionFilter getExtensionFilter()

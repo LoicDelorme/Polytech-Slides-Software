@@ -26,21 +26,21 @@ public class SlideWithTitleWithSpeechWithMovieForm extends SlideWithTitleWithSpe
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentLoadedText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentLoadedTextTextField()
 	 */
 	@Override
-	public String getContentLoadedText()
+	public String getContentLoadedTextTextField()
 	{
-		return TextHelper.getText("moviesLoaded");
+		return TextHelper.getText("slideFormMoviesLoaded");
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentButtonText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentTitleTitledPane()
 	 */
 	@Override
-	public String getContentButtonText()
+	public String getContentTitleTitledPane()
 	{
-		return TextHelper.getText("slideWithSpeechWithMovieFormMovieButtonTitledPane");
+		return TextHelper.getText("slideWithSpeechWithMovieFormMovieTitleTitledPane");
 	}
 
 	/**

@@ -53,18 +53,18 @@ public abstract class SlideWithTitleWithSpeechWithContentForm extends SlideForm 
 	}
 
 	/**
-	 * Get the content loaded text.
+	 * Get the content loaded text text field.
 	 * 
-	 * @return The content loaded text.
+	 * @return The content loaded text text field.
 	 */
-	public abstract String getContentLoadedText();
+	public abstract String getContentLoadedTextTextField();
 
 	/**
-	 * Get the content button text.
+	 * Get the content title titled pane.
 	 * 
-	 * @return The content button text.
+	 * @return The content title titled pane.
 	 */
-	public abstract String getContentButtonText();
+	public abstract String getContentTitleTitledPane();
 
 	/**
 	 * Get the extension filter.
@@ -105,18 +105,18 @@ public abstract class SlideWithTitleWithSpeechWithContentForm extends SlideForm 
 		speechFontComboBox.setConverter(new FontStringConverter());
 		speechFontComboBox.valueProperty().bindBidirectional(slideWithSpeechWithContent.getSpeechFontProperty());
 
-		this.contentTextField = new TextField(String.format(getContentLoadedText(), (slideWithSpeechWithContent.getContent().isEmpty() ? 0 : 1)));
+		this.contentTextField = new TextField(String.format(getContentLoadedTextTextField(), (slideWithSpeechWithContent.getContent().isEmpty() ? 0 : 1)));
 		this.contentTextField.setEditable(false);
 
 		this.contentButton = new Button(TextHelper.getText("slideWithSpeechWithContentFormContentButton"));
 		this.contentButton.setOnAction(this);
 
-		final TitledPane nameTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithContentFormNameTitledPane"), new HBox(nameTextField));
+		final TitledPane nameTitledPane = new TitledPane(TextHelper.getText("slideFormNameTitledPane"), new HBox(nameTextField));
 		nameTitledPane.setCollapsible(false);
 		HBox.setHgrow(nameTextField, Priority.ALWAYS);
-		final TitledPane headerTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithContentFormHeaderTitledPane"), new HBox(headerCheckBox));
+		final TitledPane headerTitledPane = new TitledPane(TextHelper.getText("slideFormHeaderTitledPane"), new HBox(headerCheckBox));
 		headerTitledPane.setCollapsible(false);
-		final TitledPane footerTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithContentFormFooterTitledPane"), new HBox(footerCheckBox));
+		final TitledPane footerTitledPane = new TitledPane(TextHelper.getText("slideFormFooterTitledPane"), new HBox(footerCheckBox));
 		footerTitledPane.setCollapsible(false);
 		final TitledPane titleTextTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithContentFormTitleTextTitledPane"), new HBox(titleTextField));
 		titleTextTitledPane.setCollapsible(false);
@@ -128,15 +128,15 @@ public abstract class SlideWithTitleWithSpeechWithContentForm extends SlideForm 
 		HBox.setHgrow(speechTextArea, Priority.ALWAYS);
 		final TitledPane speechTextFontTitledPane = new TitledPane(TextHelper.getText("slideWithSpeechWithContentFormSpeechTextFontTitledPane"), new HBox(speechFontComboBox));
 		speechTextFontTitledPane.setCollapsible(false);
-		final TitledPane contentButtonTitledPane = new TitledPane(getContentButtonText(), new HBox(this.contentTextField, this.contentButton));
+		final TitledPane contentButtonTitledPane = new TitledPane(getContentTitleTitledPane(), new HBox(this.contentTextField, this.contentButton));
 		contentButtonTitledPane.setCollapsible(false);
 		HBox.setHgrow(this.contentTextField, Priority.ALWAYS);
 
-		final TitledPane generalInformationTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithContentFormGeneralInformationTitledPane"), new TitledPane[] { nameTitledPane, headerTitledPane, footerTitledPane });
+		final TitledPane generalInformationTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormGeneralInformationTitledPane"), new TitledPane[] { nameTitledPane, headerTitledPane, footerTitledPane });
 		final TitledPane titleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithContentFormTitleTitledPane"), new TitledPane[] { titleTextTitledPane, titleTextFontTitledPane });
 		final TitledPane speechTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithContentFormSpeechTitledPane"), new TitledPane[] { speechTextTitledPane, speechTextFontTitledPane, contentButtonTitledPane });
 
-		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { generalInformationTitledPane, titleTitledPane, speechTitledPane });
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { generalInformationTitledPane, titleTitledPane, speechTitledPane });
 	}
 
 	/**
@@ -152,7 +152,7 @@ public abstract class SlideWithTitleWithSpeechWithContentForm extends SlideForm 
 		if (selectedFile != null)
 		{
 			((SlideWithTitleWithSpeechWithContent) this.slide).getContentProperty().set(Base64Helper.encode(selectedFile));
-			this.contentTextField.setText(String.format(getContentLoadedText(), 1));
+			this.contentTextField.setText(String.format(getContentLoadedTextTextField(), 1));
 		}
 	}
 }

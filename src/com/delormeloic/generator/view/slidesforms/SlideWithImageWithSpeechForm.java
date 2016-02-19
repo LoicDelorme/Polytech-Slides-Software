@@ -26,25 +26,25 @@ public class SlideWithImageWithSpeechForm extends SlideWithContentWithSpeechForm
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentLoadedText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithContentWithSpeechForm#getContentLoadedTextTextField()
 	 */
 	@Override
-	public String getContentLoadedText()
+	public String getContentLoadedTextTextField()
 	{
-		return TextHelper.getText("imagesLoaded");
+		return TextHelper.getText("slideFormImagesLoaded");
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getContentButtonText()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithContentWithSpeechForm#getContentTitleTitledPane()
 	 */
 	@Override
-	public String getContentButtonText()
+	public String getContentTitleTitledPane()
 	{
-		return TextHelper.getText("slideWithContentWithSpeechFormImageButtonTitledPane");
+		return TextHelper.getText("slideWithContentWithSpeechFormImageTitleTitledPane");
 	}
 
 	/**
-	 * @see com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithContentForm#getExtensionFilter()
+	 * @see com.delormeloic.generator.view.slidesforms.SlideWithContentWithSpeechForm#getExtensionFilter()
 	 */
 	@Override
 	public ExtensionFilter getExtensionFilter()

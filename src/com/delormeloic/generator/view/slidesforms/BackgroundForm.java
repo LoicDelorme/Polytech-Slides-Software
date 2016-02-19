@@ -47,7 +47,7 @@ public class BackgroundForm implements IFormable
 
 		final TitledPane backgroundTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("backgroundFormBackgroundTitledPane"), new TitledPane[] { backgroundColorTitledPane });
 
-		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { backgroundTitledPane });
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { backgroundTitledPane });
 	}
 
 	/**

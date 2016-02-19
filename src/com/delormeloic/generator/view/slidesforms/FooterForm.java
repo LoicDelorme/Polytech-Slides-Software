@@ -71,7 +71,7 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 	@Override
 	public Node toForm()
 	{
-		this.leftImageTextField = new TextField(String.format(TextHelper.getText("imagesLoaded"), (this.footer.getLeftImage().isEmpty() ? 0 : 1)));
+		this.leftImageTextField = new TextField(String.format(TextHelper.getText("slideFormImagesLoaded"), (this.footer.getLeftImage().isEmpty() ? 0 : 1)));
 		this.leftImageTextField.setEditable(false);
 
 		this.leftImageButton = new Button(TextHelper.getText("footerFormLeftImageButton"));
@@ -84,7 +84,7 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 		middleTextFontComboBox.setConverter(new FontStringConverter());
 		middleTextFontComboBox.valueProperty().bindBidirectional(this.footer.getMiddleTextFontProperty());
 
-		this.rightImageTextField = new TextField(String.format(TextHelper.getText("imagesLoaded"), (this.footer.getRightImage().isEmpty() ? 0 : 1)));
+		this.rightImageTextField = new TextField(String.format(TextHelper.getText("slideFormImagesLoaded"), (this.footer.getRightImage().isEmpty() ? 0 : 1)));
 		this.rightImageTextField.setEditable(false);
 
 		this.rightImageButton = new Button(TextHelper.getText("footerFormRightImageButton"));
@@ -106,7 +106,7 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 		final TitledPane middleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("footerFormMiddleTitledPane"), new TitledPane[] { middleTextTitledPane, middleTextFontTitledPane });
 		final TitledPane rightTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("footerFormRightTitledPane"), new TitledPane[] { rightImageTitledPane });
 
-		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { leftTitledPane, middleTitledPane, rightTitledPane });
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { leftTitledPane, middleTitledPane, rightTitledPane });
 	}
 
 	/**
@@ -127,13 +127,13 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 			if (selectedButton == this.leftImageButton)
 			{
 				this.footer.getLeftImageProperty().set(encodedData);
-				this.leftImageTextField.setText(String.format(TextHelper.getText("imagesLoaded"), 1));
+				this.leftImageTextField.setText(String.format(TextHelper.getText("slideFormImagesLoaded"), 1));
 			}
 
 			if (selectedButton == this.rightImageButton)
 			{
 				this.footer.getRightImageProperty().set(encodedData);
-				this.rightImageTextField.setText(String.format(TextHelper.getText("imagesLoaded"), 1));
+				this.rightImageTextField.setText(String.format(TextHelper.getText("slideFormImagesLoaded"), 1));
 			}
 		}
 	}

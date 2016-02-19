@@ -59,7 +59,7 @@ public class HeaderForm implements IFormable
 
 		final TitledPane middleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("headerFormMiddleTitledPane"), new TitledPane[] { middleTextTitledPane, middleTextFontTitledPane });
 
-		return FormBuilderHelper.buildTitledPane(TextHelper.getText("dataForm"), new TitledPane[] { middleTitledPane });
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { middleTitledPane });
 	}
 
 	/**

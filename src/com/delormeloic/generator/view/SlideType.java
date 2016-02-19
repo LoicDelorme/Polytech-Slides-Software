@@ -3,10 +3,14 @@ package com.delormeloic.generator.view;
 import java.lang.reflect.InvocationTargetException;
 
 import com.delormeloic.generator.model.slides.Slide;
+import com.delormeloic.generator.model.slides.SlideWithImageWithSpeech;
+import com.delormeloic.generator.model.slides.SlideWithMovieWithSpeech;
 import com.delormeloic.generator.model.slides.SlideWithTitle;
 import com.delormeloic.generator.model.slides.SlideWithTitleWithSpeechWithImage;
 import com.delormeloic.generator.model.slides.SlideWithTitleWithSpeechWithMovie;
 import com.delormeloic.generator.view.slidesforms.SlideForm;
+import com.delormeloic.generator.view.slidesforms.SlideWithImageWithSpeechForm;
+import com.delormeloic.generator.view.slidesforms.SlideWithMovieWithSpeechForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithTitleForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithImageForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithMovieForm;
@@ -33,7 +37,17 @@ public enum SlideType
 	/**
 	 * A slide with a title with a speech with a movie.
 	 */
-	SLIDE_WITH_TITLE_WITH_SPEECH_WITH_MOVIE("/com/delormeloic/generator/view/resources/images/slide_with_speech_with_movie.png", SlideWithTitleWithSpeechWithMovie.class, SlideWithTitleWithSpeechWithMovieForm.class);
+	SLIDE_WITH_TITLE_WITH_SPEECH_WITH_MOVIE("/com/delormeloic/generator/view/resources/images/slide_with_speech_with_movie.png", SlideWithTitleWithSpeechWithMovie.class, SlideWithTitleWithSpeechWithMovieForm.class),
+
+	/**
+	 * A slide with an image with a speech.
+	 */
+	SLIDE_WITH_IMAGE_WITH_SPEECH("/com/delormeloic/generator/view/resources/images/slide_with_speech_with_image.png", SlideWithImageWithSpeech.class, SlideWithImageWithSpeechForm.class),
+
+	/**
+	 * A slide with a movie with a speech.
+	 */
+	SLIDE_WITH_MOVIE_WITH_SPEECH("/com/delormeloic/generator/view/resources/images/slide_with_speech_with_movie.png", SlideWithMovieWithSpeech.class, SlideWithMovieWithSpeechForm.class);
 
 	/**
 	 * The image path.

@@ -3,12 +3,12 @@ package com.delormeloic.generator.model.slides;
 import org.json.JSONObject;
 
 /**
- * This class represents a slide with a speech with an image.
+ * This class represents a slide with a title with a speech with an image.
  * 
  * @author DELORME Loïc
  * @since 1.0.0
  */
-public class SlideWithSpeechWithImage extends SlideWithSpeechWithContent
+public class SlideWithTitleWithSpeechWithImage extends SlideWithTitleWithSpeechWithContent
 {
 	/**
 	 * The class for name.
@@ -21,31 +21,31 @@ public class SlideWithSpeechWithImage extends SlideWithSpeechWithContent
 	public static final String IMAGE_ATTRIBUTE = "image";
 
 	/**
-	 * Create a slide with a speech with an image.
+	 * Create a slide with a title with a speech with an image.
 	 * 
 	 * @param name
 	 *            The name.
 	 * @param data
 	 *            The data.
 	 */
-	public SlideWithSpeechWithImage(String name, JSONObject data)
+	public SlideWithTitleWithSpeechWithImage(String name, JSONObject data)
 	{
 		super(CLASS_FOR_NAME, name, data);
 	}
 
 	/**
-	 * Create a slide with a speech with an image.
+	 * Create a slide with a title with a speech with an image.
 	 * 
 	 * @param name
 	 *            The name.
 	 */
-	public SlideWithSpeechWithImage(String name)
+	public SlideWithTitleWithSpeechWithImage(String name)
 	{
 		super(CLASS_FOR_NAME, name);
 	}
 
 	/**
-	 * @see com.delormeloic.generator.model.slides.SlideWithSpeechWithContent#getContentAttribute()
+	 * @see com.delormeloic.generator.model.slides.SlideWithTitleWithSpeechWithContent#getContentAttribute()
 	 */
 	@Override
 	public String getContentAttribute()

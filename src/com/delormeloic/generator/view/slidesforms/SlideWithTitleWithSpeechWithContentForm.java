@@ -2,7 +2,7 @@ package com.delormeloic.generator.view.slidesforms;
 
 import java.io.File;
 
-import com.delormeloic.generator.model.slides.SlideWithSpeechWithContent;
+import com.delormeloic.generator.model.slides.SlideWithTitleWithSpeechWithContent;
 import com.delormeloic.generator.view.converters.FontStringConverter;
 import com.delormeloic.generator.view.helpers.Base64Helper;
 import com.delormeloic.generator.view.helpers.FontsHelper;
@@ -24,12 +24,12 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
 /**
- * This class represents a slide with a speech with a content form.
+ * This class represents a slide with a title with a speech with a content form.
  * 
  * @author DELORME Loïc
  * @since 1.0.0
  */
-public abstract class SlideWithSpeechWithContentForm extends SlideForm implements EventHandler<ActionEvent>
+public abstract class SlideWithTitleWithSpeechWithContentForm extends SlideForm implements EventHandler<ActionEvent>
 {
 	/**
 	 * The content text field.
@@ -42,14 +42,14 @@ public abstract class SlideWithSpeechWithContentForm extends SlideForm implement
 	private Button contentButton;
 
 	/**
-	 * Create a slide with a speech with a content form.
+	 * Create a slide with a title with a speech with a content form.
 	 * 
-	 * @param slideWithSpeechWithContent
-	 *            The slide with a speech with a content.
+	 * @param slideWithTitleWithSpeechWithContent
+	 *            The slide with a title with a speech with a content.
 	 */
-	public SlideWithSpeechWithContentForm(SlideWithSpeechWithContent slideWithSpeechWithContent)
+	public SlideWithTitleWithSpeechWithContentForm(SlideWithTitleWithSpeechWithContent slideWithTitleWithSpeechWithContent)
 	{
-		super(slideWithSpeechWithContent);
+		super(slideWithTitleWithSpeechWithContent);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public abstract class SlideWithSpeechWithContentForm extends SlideForm implement
 	@Override
 	public Node toForm()
 	{
-		final SlideWithSpeechWithContent slideWithSpeechWithContent = (SlideWithSpeechWithContent) this.slide;
+		final SlideWithTitleWithSpeechWithContent slideWithSpeechWithContent = (SlideWithTitleWithSpeechWithContent) this.slide;
 
 		final TextField nameTextField = new TextField();
 		nameTextField.textProperty().bindBidirectional(slideWithSpeechWithContent.getNameProperty());
@@ -151,7 +151,7 @@ public abstract class SlideWithSpeechWithContentForm extends SlideForm implement
 		final File selectedFile = fileChooser.showOpenDialog(null);
 		if (selectedFile != null)
 		{
-			((SlideWithSpeechWithContent) this.slide).getContentProperty().set(Base64Helper.encode(selectedFile));
+			((SlideWithTitleWithSpeechWithContent) this.slide).getContentProperty().set(Base64Helper.encode(selectedFile));
 			this.contentTextField.setText(String.format(getContentLoadedText(), 1));
 		}
 	}

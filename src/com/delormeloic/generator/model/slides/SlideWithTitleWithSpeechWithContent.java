@@ -11,12 +11,12 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.text.Font;
 
 /**
- * This class represents a slide with a speech with a content.
+ * This class represents a slide with a title with a speech with a content.
  * 
  * @author DELORME Loïc
  * @since 1.0.0
  */
-public abstract class SlideWithSpeechWithContent extends Slide
+public abstract class SlideWithTitleWithSpeechWithContent extends Slide
 {
 	/**
 	 * The header attribute.
@@ -84,7 +84,7 @@ public abstract class SlideWithSpeechWithContent extends Slide
 	private final StringProperty content;
 
 	/**
-	 * Create a slide with a speech with a content.
+	 * Create a slide with a title with a speech with a content.
 	 * 
 	 * @param classForName
 	 *            The class for name.
@@ -93,7 +93,7 @@ public abstract class SlideWithSpeechWithContent extends Slide
 	 * @param data
 	 *            The data.
 	 */
-	public SlideWithSpeechWithContent(String classForName, String name, JSONObject data)
+	public SlideWithTitleWithSpeechWithContent(String classForName, String name, JSONObject data)
 	{
 		super(classForName, name);
 		this.header = new SimpleBooleanProperty(data.getBoolean(HEADER_ATTRIBUTE));
@@ -106,14 +106,14 @@ public abstract class SlideWithSpeechWithContent extends Slide
 	}
 
 	/**
-	 * Create a slide with a speech with a content.
+	 * Create a slide with a title with a speech with a content.
 	 * 
 	 * @param classForName
 	 *            The class for name.
 	 * @param name
 	 *            The name.
 	 */
-	public SlideWithSpeechWithContent(String classForName, String name)
+	public SlideWithTitleWithSpeechWithContent(String classForName, String name)
 	{
 		super(classForName, name);
 		this.header = new SimpleBooleanProperty(IConstants.DEFAULT_HEADER_VALUE);

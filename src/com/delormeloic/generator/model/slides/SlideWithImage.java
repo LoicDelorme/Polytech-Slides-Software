@@ -3,43 +3,43 @@ package com.delormeloic.generator.model.slides;
 import org.json.JSONObject;
 
 /**
- * This class represents a slide with a movie.
+ * This class represents a slide with an image.
  * 
  * @author DELORME Loïc
  * @since 1.0.0
  */
-public class SlideWithMovie extends SlideWithContent
+public class SlideWithImage extends SlideWithContent
 {
 	/**
 	 * The class for name.
 	 */
-	public static final String CLASS_FOR_NAME = "SlideWithMovie";
+	public static final String CLASS_FOR_NAME = "SlideWithImage";
 
 	/**
-	 * The movie attribute.
+	 * The image attribute.
 	 */
-	public static final String MOVIE_ATTRIBUTE = "movie";
+	public static final String IMAGE_ATTRIBUTE = "image";
 
 	/**
-	 * Create a slide with a movie.
+	 * Create a slide with an image.
 	 * 
 	 * @param name
 	 *            The name.
 	 * @param data
 	 *            The data.
 	 */
-	public SlideWithMovie(String name, JSONObject data)
+	public SlideWithImage(String name, JSONObject data)
 	{
 		super(CLASS_FOR_NAME, name, data);
 	}
 
 	/**
-	 * Create a slide with a movie.
+	 * Create a slide with an image.
 	 * 
 	 * @param name
 	 *            The name.
 	 */
-	public SlideWithMovie(String name)
+	public SlideWithImage(String name)
 	{
 		super(CLASS_FOR_NAME, name);
 	}
@@ -50,6 +50,6 @@ public class SlideWithMovie extends SlideWithContent
 	@Override
 	public String getContentAttribute()
 	{
-		return MOVIE_ATTRIBUTE;
+		return IMAGE_ATTRIBUTE;
 	}
 }

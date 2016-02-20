@@ -121,10 +121,10 @@ public abstract class SlideWithContentWithSpeechForm extends SlideForm implement
 		HBox.setHgrow(this.contentTextField, Priority.ALWAYS);
 
 		final TitledPane generalInformationTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormGeneralInformationTitledPane"), new TitledPane[] { nameTitledPane, headerTitledPane, footerTitledPane });
-		final TitledPane speechTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithContentWithSpeechFormSpeechTitledPane"), new TitledPane[] { speechTextTitledPane, speechTextFontTitledPane });
 		final TitledPane contentTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithContentWithSpeechFormContentTitledPane"), new TitledPane[] { contentButtonTitledPane });
+		final TitledPane speechTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithContentWithSpeechFormSpeechTitledPane"), new TitledPane[] { speechTextTitledPane, speechTextFontTitledPane });
 
-		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { generalInformationTitledPane, speechTitledPane, contentTitledPane });
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { generalInformationTitledPane, contentTitledPane, speechTitledPane });
 	}
 
 	/**

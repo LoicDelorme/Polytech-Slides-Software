@@ -13,7 +13,7 @@ public class SlideWithTitleWithSpeechWithMovie extends SlideWithTitleWithSpeechW
 	/**
 	 * The class for name.
 	 */
-	public static final String CLASS_FOR_NAME = "SlideWithSpeechWithMovie";
+	public static final String CLASS_FOR_NAME = "SlideWithTitleWithSpeechWithMovie";
 
 	/**
 	 * The movie attribute.

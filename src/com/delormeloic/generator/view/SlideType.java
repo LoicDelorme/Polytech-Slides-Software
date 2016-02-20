@@ -7,17 +7,21 @@ import com.delormeloic.generator.model.slides.SlideWithImage;
 import com.delormeloic.generator.model.slides.SlideWithImageWithSpeech;
 import com.delormeloic.generator.model.slides.SlideWithMovie;
 import com.delormeloic.generator.model.slides.SlideWithMovieWithSpeech;
+import com.delormeloic.generator.model.slides.SlideWithOneTrombinoscope;
 import com.delormeloic.generator.model.slides.SlideWithTitle;
 import com.delormeloic.generator.model.slides.SlideWithTitleWithSpeechWithImage;
 import com.delormeloic.generator.model.slides.SlideWithTitleWithSpeechWithMovie;
+import com.delormeloic.generator.model.slides.SlideWithTwoTrombinoscope;
 import com.delormeloic.generator.view.slidesforms.SlideForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithImageForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithImageWithSpeechForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithMovieForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithMovieWithSpeechForm;
+import com.delormeloic.generator.view.slidesforms.SlideWithOneTrombinoscopeForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithTitleForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithImageForm;
 import com.delormeloic.generator.view.slidesforms.SlideWithTitleWithSpeechWithMovieForm;
+import com.delormeloic.generator.view.slidesforms.SlideWithTwoTrombinoscopeForm;
 import com.delormeloic.utils.logger.Logger;
 
 /**
@@ -61,7 +65,17 @@ public enum SlideType
 	/**
 	 * A slide with a movie.
 	 */
-	SLIDE_WITH_MOVIE("/com/delormeloic/generator/view/resources/images/slide_with_movie.png", SlideWithMovie.class, SlideWithMovieForm.class);
+	SLIDE_WITH_MOVIE("/com/delormeloic/generator/view/resources/images/slide_with_movie.png", SlideWithMovie.class, SlideWithMovieForm.class),
+
+	/**
+	 * A slide with one trombinoscope.
+	 */
+	SLIDE_WITH_ONE_TROMBINOSCOPE("/com/delormeloic/generator/view/resources/images/slide_with_one_trombinoscope.png", SlideWithOneTrombinoscope.class, SlideWithOneTrombinoscopeForm.class),
+
+	/**
+	 * A slide with two trombinoscope.
+	 */
+	SLIDE_WITH_TWO_TROMBINOSCOPE("/com/delormeloic/generator/view/resources/images/slide_with_two_trombinoscope.png", SlideWithTwoTrombinoscope.class, SlideWithTwoTrombinoscopeForm.class);
 
 	/**
 	 * The image path.

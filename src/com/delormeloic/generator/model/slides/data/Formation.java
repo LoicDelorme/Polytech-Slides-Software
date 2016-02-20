@@ -66,7 +66,7 @@ public class Formation implements ISerializable
 	 */
 	public Formation()
 	{
-		this.name = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
+		this.name = new SimpleStringProperty(IConstants.DEFAULT_FORMATION_NAME);
 		this.introduction = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 		this.students = new ArrayList<Student>();
 		this.conclusion = new SimpleStringProperty(IConstants.DEFAULT_TEXT);

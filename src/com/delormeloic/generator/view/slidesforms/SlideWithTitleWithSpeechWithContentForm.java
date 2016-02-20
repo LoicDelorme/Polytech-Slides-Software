@@ -134,9 +134,10 @@ public abstract class SlideWithTitleWithSpeechWithContentForm extends SlideForm 
 
 		final TitledPane generalInformationTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormGeneralInformationTitledPane"), new TitledPane[] { nameTitledPane, headerTitledPane, footerTitledPane });
 		final TitledPane titleTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithContentFormTitleTitledPane"), new TitledPane[] { titleTextTitledPane, titleTextFontTitledPane });
-		final TitledPane speechTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithContentFormSpeechTitledPane"), new TitledPane[] { speechTextTitledPane, speechTextFontTitledPane, contentButtonTitledPane });
+		final TitledPane speechTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithContentFormSpeechTitledPane"), new TitledPane[] { speechTextTitledPane, speechTextFontTitledPane });
+		final TitledPane contentTitledPane = FormBuilderHelper.buildTitledPane(TextHelper.getText("slideWithSpeechWithContentFormContentTitledPane"), new TitledPane[] { contentButtonTitledPane });
 
-		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { generalInformationTitledPane, titleTitledPane, speechTitledPane });
+		return FormBuilderHelper.buildTitledPane(TextHelper.getText("slideFormDataTitledPane"), new TitledPane[] { generalInformationTitledPane, titleTitledPane, speechTitledPane, contentTitledPane });
 	}
 
 	/**

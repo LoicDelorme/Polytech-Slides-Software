@@ -1,9 +1,9 @@
 package com.delormeloic.generator.view.slidesforms;
 
+import com.delormeloic.generator.model.slides.IConstants;
 import com.delormeloic.generator.model.slides.SlideWithImageWithSpeech;
 import com.delormeloic.generator.view.helpers.TextHelper;
 
-import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
@@ -49,6 +49,6 @@ public class SlideWithImageWithSpeechForm extends SlideWithContentWithSpeechForm
 	@Override
 	public ExtensionFilter getExtensionFilter()
 	{
-		return new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png");
+		return IConstants.DEFAULT_IMAGE_EXTENSION_FILTER;
 	}
 }

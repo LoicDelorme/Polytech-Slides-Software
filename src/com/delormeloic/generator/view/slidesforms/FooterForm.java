@@ -3,6 +3,7 @@ package com.delormeloic.generator.view.slidesforms;
 import java.io.File;
 
 import com.delormeloic.generator.model.slides.Footer;
+import com.delormeloic.generator.model.slides.IConstants;
 import com.delormeloic.generator.view.converters.FontStringConverter;
 import com.delormeloic.generator.view.helpers.Base64Helper;
 import com.delormeloic.generator.view.helpers.FontsHelper;
@@ -116,7 +117,7 @@ public class FooterForm implements IFormable, EventHandler<ActionEvent>
 	public void handle(ActionEvent event)
 	{
 		final FileChooser fileChooser = new FileChooser();
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png"));
+		fileChooser.getExtensionFilters().add(IConstants.DEFAULT_IMAGE_EXTENSION_FILTER);
 
 		final File selectedFile = fileChooser.showOpenDialog(null);
 		if (selectedFile != null)

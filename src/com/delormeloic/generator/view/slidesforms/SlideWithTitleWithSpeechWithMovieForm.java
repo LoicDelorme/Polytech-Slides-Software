@@ -1,9 +1,9 @@
 package com.delormeloic.generator.view.slidesforms;
 
+import com.delormeloic.generator.model.slides.IConstants;
 import com.delormeloic.generator.model.slides.SlideWithTitleWithSpeechWithMovie;
 import com.delormeloic.generator.view.helpers.TextHelper;
 
-import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
@@ -49,6 +49,6 @@ public class SlideWithTitleWithSpeechWithMovieForm extends SlideWithTitleWithSpe
 	@Override
 	public ExtensionFilter getExtensionFilter()
 	{
-		return new FileChooser.ExtensionFilter("Movies", "*.mp4");
+		return IConstants.DEFAULT_MOVIE_EXTENSION_FILTER;
 	}
 }

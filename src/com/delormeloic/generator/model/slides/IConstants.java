@@ -1,7 +1,10 @@
 package com.delormeloic.generator.model.slides;
 
+import java.util.regex.Pattern;
+
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 
 /**
  * This interface represents all useful constants.
@@ -40,4 +43,24 @@ public interface IConstants
 	 * The default background color.
 	 */
 	public static final Color DEFAULT_BACKGROUND_COLOR = Color.rgb(0, 155, 221);
+
+	/**
+	 * The default formation name.
+	 */
+	public static final String DEFAULT_FORMATION_NAME = "Computer Science";
+
+	/**
+	 * The default image extension filter.
+	 */
+	public static final FileChooser.ExtensionFilter DEFAULT_IMAGE_EXTENSION_FILTER = new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png");
+
+	/**
+	 * The default movie extension filter.
+	 */
+	public static final FileChooser.ExtensionFilter DEFAULT_MOVIE_EXTENSION_FILTER = new FileChooser.ExtensionFilter("Movies", "*.mp4");
+
+	/**
+	 * The default student pattern 'studentNumber_lastName_firstName'.
+	 */
+	public static final Pattern DEFAULT_STUDENT_PATTERN = Pattern.compile("(.*?)_(.*?)_(.*?)");
 }

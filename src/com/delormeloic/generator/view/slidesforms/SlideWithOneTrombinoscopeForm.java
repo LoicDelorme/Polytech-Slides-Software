@@ -22,6 +22,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -125,6 +126,8 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 		final CheckBox footerCheckBox = new CheckBox();
 		footerCheckBox.selectedProperty().bindBidirectional(slideWithOneTrombinoscope.getFooterProperty());
 
+		final Label formationsLabel = new Label(TextHelper.getText("slideWithOneTrombinoscopeFormFormationsLabel"));
+
 		this.formations = new ListView<Formation>();
 		this.formations.itemsProperty().bindBidirectional(slideWithOneTrombinoscope.getFormationsProperty());
 		this.formations.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -148,7 +151,7 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 		buttonsHBox.setAlignment(Pos.CENTER_LEFT);
 		HBox.setHgrow(region, Priority.ALWAYS);
 
-		final VBox formationsVBox = new VBox(this.formations, buttonsHBox);
+		final VBox formationsVBox = new VBox(formationsLabel, this.formations, buttonsHBox);
 		formationsVBox.setAlignment(Pos.CENTER);
 
 		computeDisabledButtons(-1);

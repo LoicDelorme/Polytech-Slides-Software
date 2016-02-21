@@ -1,8 +1,5 @@
 package com.delormeloic.generator.model.slides;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,7 +7,11 @@ import com.delormeloic.generator.model.helpers.FormationParserHelper;
 import com.delormeloic.generator.model.slides.data.Formation;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * This class represents a slide with one trombinoscope.
@@ -53,7 +54,7 @@ public class SlideWithOneTrombinoscope extends Slide
 	/**
 	 * The formations.
 	 */
-	private final List<Formation> formations;
+	private final ListProperty<Formation> formations;
 
 	/**
 	 * Create a slide with one trombinoscope.
@@ -68,7 +69,7 @@ public class SlideWithOneTrombinoscope extends Slide
 		super(CLASS_FOR_NAME, name);
 		this.header = new SimpleBooleanProperty(data.getBoolean(HEADER_ATTRIBUTE));
 		this.footer = new SimpleBooleanProperty(data.getBoolean(FOOTER_ATTRIBUTE));
-		this.formations = new ArrayList<Formation>(FormationParserHelper.parseFormations(data.getJSONArray(FORMATIONS_ATTRIBUTE)));
+		this.formations = new SimpleListProperty<Formation>(FXCollections.observableArrayList(FormationParserHelper.parseFormations(data.getJSONArray(FORMATIONS_ATTRIBUTE))));
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class SlideWithOneTrombinoscope extends Slide
 		super(CLASS_FOR_NAME, name);
 		this.header = new SimpleBooleanProperty(IConstants.DEFAULT_HEADER_VALUE);
 		this.footer = new SimpleBooleanProperty(IConstants.DEFAULT_FOOTER_VALUE);
-		this.formations = new ArrayList<Formation>();
+		this.formations = new SimpleListProperty<Formation>(FXCollections.observableArrayList());
 	}
 
 	/**
@@ -130,7 +131,17 @@ public class SlideWithOneTrombinoscope extends Slide
 	 * 
 	 * @return The formations.
 	 */
-	public List<Formation> getFormations()
+	public ObservableList<Formation> getFormations()
+	{
+		return this.formations.get();
+	}
+
+	/**
+	 * Get the formations property.
+	 * 
+	 * @return The formations property.
+	 */
+	public ListProperty<Formation> getFormationsProperty()
 	{
 		return this.formations;
 	}
@@ -142,7 +153,7 @@ public class SlideWithOneTrombinoscope extends Slide
 	public JSONObject getData()
 	{
 		final JSONArray formationsData = new JSONArray();
-		for (Formation formation : this.formations)
+		for (Formation formation : getFormations())
 		{
 			formationsData.put(formation.toJSON());
 		}

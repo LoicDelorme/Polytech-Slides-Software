@@ -1,8 +1,5 @@
 package com.delormeloic.generator.model.slides;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,7 +7,11 @@ import com.delormeloic.generator.model.helpers.FormationParserHelper;
 import com.delormeloic.generator.model.slides.data.Formation;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * This class represents a slide with two trombinoscope.
@@ -58,12 +59,12 @@ public class SlideWithTwoTrombinoscope extends Slide
 	/**
 	 * The left formations.
 	 */
-	private final List<Formation> leftFormations;
+	private final ListProperty<Formation> leftFormations;
 
 	/**
 	 * The right formations.
 	 */
-	private final List<Formation> rightFormations;
+	private final ListProperty<Formation> rightFormations;
 
 	/**
 	 * Create a slide with two trombinoscope.
@@ -78,8 +79,8 @@ public class SlideWithTwoTrombinoscope extends Slide
 		super(CLASS_FOR_NAME, name);
 		this.header = new SimpleBooleanProperty(data.getBoolean(HEADER_ATTRIBUTE));
 		this.footer = new SimpleBooleanProperty(data.getBoolean(FOOTER_ATTRIBUTE));
-		this.leftFormations = new ArrayList<Formation>(FormationParserHelper.parseFormations(data.getJSONArray(LEFT_FORMATIONS_ATTRIBUTE)));
-		this.rightFormations = new ArrayList<Formation>(FormationParserHelper.parseFormations(data.getJSONArray(RIGHT_FORMATIONS_ATTRIBUTE)));
+		this.leftFormations = new SimpleListProperty<>(FXCollections.observableArrayList(FormationParserHelper.parseFormations(data.getJSONArray(LEFT_FORMATIONS_ATTRIBUTE))));
+		this.rightFormations = new SimpleListProperty<>(FXCollections.observableArrayList(FormationParserHelper.parseFormations(data.getJSONArray(RIGHT_FORMATIONS_ATTRIBUTE))));
 	}
 
 	/**
@@ -93,8 +94,8 @@ public class SlideWithTwoTrombinoscope extends Slide
 		super(CLASS_FOR_NAME, name);
 		this.header = new SimpleBooleanProperty(IConstants.DEFAULT_HEADER_VALUE);
 		this.footer = new SimpleBooleanProperty(IConstants.DEFAULT_FOOTER_VALUE);
-		this.leftFormations = new ArrayList<Formation>();
-		this.rightFormations = new ArrayList<Formation>();
+		this.leftFormations = new SimpleListProperty<Formation>(FXCollections.observableArrayList());
+		this.rightFormations = new SimpleListProperty<Formation>(FXCollections.observableArrayList());
 	}
 
 	/**
@@ -142,7 +143,17 @@ public class SlideWithTwoTrombinoscope extends Slide
 	 * 
 	 * @return The left formations.
 	 */
-	public List<Formation> getLeftFormations()
+	public ObservableList<Formation> getLeftFormations()
+	{
+		return this.leftFormations.get();
+	}
+
+	/**
+	 * Get the left formations property.
+	 * 
+	 * @return The left formations property.
+	 */
+	public ListProperty<Formation> getLeftFormationsProperty()
 	{
 		return this.leftFormations;
 	}
@@ -152,7 +163,17 @@ public class SlideWithTwoTrombinoscope extends Slide
 	 * 
 	 * @return The right formations.
 	 */
-	public List<Formation> getRightFormations()
+	public ObservableList<Formation> getRightFormations()
+	{
+		return this.rightFormations.get();
+	}
+
+	/**
+	 * Get the right formations property.
+	 * 
+	 * @return The right formations property.
+	 */
+	public ListProperty<Formation> getRightFormationsProperty()
 	{
 		return this.rightFormations;
 	}
@@ -164,13 +185,13 @@ public class SlideWithTwoTrombinoscope extends Slide
 	public JSONObject getData()
 	{
 		final JSONArray leftFormationsData = new JSONArray();
-		for (Formation formation : this.leftFormations)
+		for (Formation formation : getLeftFormations())
 		{
 			leftFormationsData.put(formation.toJSON());
 		}
 
 		final JSONArray rightFormationsData = new JSONArray();
-		for (Formation formation : this.rightFormations)
+		for (Formation formation : getRightFormations())
 		{
 			rightFormationsData.put(formation.toJSON());
 		}

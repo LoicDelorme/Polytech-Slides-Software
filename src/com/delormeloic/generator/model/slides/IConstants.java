@@ -60,7 +60,7 @@ public interface IConstants
 	public static final FileChooser.ExtensionFilter DEFAULT_MOVIE_EXTENSION_FILTER = new FileChooser.ExtensionFilter("Movies", "*.mp4");
 
 	/**
-	 * The default student pattern 'studentNumber_lastName_firstName'.
+	 * The default student pattern 'STUDENTNUMBER_LASTNAME_FIRSTNAME'.
 	 */
-	public static final Pattern DEFAULT_STUDENT_PATTERN = Pattern.compile("(.*?)_(.*?)_(.*?)");
+	public static final Pattern DEFAULT_STUDENT_PATTERN = Pattern.compile("(.*?)_(.*?)_(.*?)+(\\.(?i)(jpg|png))$");
 }

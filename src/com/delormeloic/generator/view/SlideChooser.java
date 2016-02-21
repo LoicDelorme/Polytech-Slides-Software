@@ -20,7 +20,7 @@ public class SlideChooser extends GridPane implements EventHandler<ActionEvent>
 	/**
 	 * The number of slides by line.
 	 */
-	public static final int NUMBER_OF_SLIDES_BY_LINE = 5;
+	public static final int NUMBER_OF_SLIDES_BY_LINE = 8;
 
 	/**
 	 * The list of slides choosers items.

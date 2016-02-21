@@ -13,7 +13,7 @@ import com.delormeloic.generator.model.slides.Header;
 import com.delormeloic.generator.model.slides.Slide;
 
 /**
- * This class represents plain text file model which uses JSON representation.
+ * This class represents a plain text file model which uses JSON representation.
  * 
  * @author DELORME Loïc
  * @since 1.0.0
@@ -76,9 +76,9 @@ public class JSONPlainTextFileModel extends PlainTextFileModel
 	public String serializeData()
 	{
 		final JSONArray slidesData = new JSONArray();
-		for (Slide currentSlide : this.slides)
+		for (Slide slide : this.slides)
 		{
-			slidesData.put(currentSlide.toJSON());
+			slidesData.put(slide.toJSON());
 		}
 
 		final JSONObject serializedData = new JSONObject();

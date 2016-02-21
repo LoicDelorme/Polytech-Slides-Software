@@ -63,17 +63,6 @@ public class Formation implements ISerializable
 
 	/**
 	 * Create a formation.
-	 */
-	public Formation()
-	{
-		this.name = new SimpleStringProperty(IConstants.DEFAULT_FORMATION_NAME);
-		this.introduction = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
-		this.students = new ArrayList<Student>();
-		this.conclusion = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
-	}
-
-	/**
-	 * Create a formation.
 	 * 
 	 * @param data
 	 *            The data.
@@ -84,6 +73,17 @@ public class Formation implements ISerializable
 		this.introduction = new SimpleStringProperty(data.getString(INTRODUCTION_ATTRIBUTE));
 		this.students = new ArrayList<Student>(StudentParserHelper.parseStudents(data.getJSONArray(STUDENTS_ATTRIBUTE)));
 		this.conclusion = new SimpleStringProperty(data.getString(CONCLUSION_ATTRIBUTE));
+	}
+
+	/**
+	 * Create a formation.
+	 */
+	public Formation()
+	{
+		this.name = new SimpleStringProperty(IConstants.DEFAULT_FORMATION_NAME);
+		this.introduction = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
+		this.students = new ArrayList<Student>();
+		this.conclusion = new SimpleStringProperty(IConstants.DEFAULT_TEXT);
 	}
 
 	/**

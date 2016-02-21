@@ -2,6 +2,7 @@ package com.delormeloic.generator.view.slidesforms;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 
 import com.delormeloic.generator.model.slides.IConstants;
@@ -15,7 +16,6 @@ import com.delormeloic.generator.view.helpers.TextHelper;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -53,11 +53,6 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 	private Button addFormationButton;
 
 	/**
-	 * The remove formation button.
-	 */
-	private Button removeFormationButton;
-
-	/**
 	 * The move up formation button.
 	 */
 	private Button moveUpFormationButton;
@@ -66,6 +61,11 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 	 * The move down formation button.
 	 */
 	private Button moveDownFormationButton;
+
+	/**
+	 * The remove formation button.
+	 */
+	private Button removeFormationButton;
 
 	/**
 	 * The name text field.
@@ -125,22 +125,23 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 		final CheckBox footerCheckBox = new CheckBox();
 		footerCheckBox.selectedProperty().bindBidirectional(slideWithOneTrombinoscope.getFooterProperty());
 
-		this.formations = new ListView<Formation>(FXCollections.observableArrayList(slideWithOneTrombinoscope.getFormations()));
+		this.formations = new ListView<Formation>();
+		this.formations.itemsProperty().bindBidirectional(slideWithOneTrombinoscope.getFormationsProperty());
 		this.formations.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		this.formations.getSelectionModel().selectedItemProperty().addListener(this);
 		this.formations.setCellFactory(new FormationCallback());
+		this.formations.getSelectionModel().selectedItemProperty().addListener(this);
 
 		this.addFormationButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/add_slide.png"))));
 		this.addFormationButton.setOnAction(this);
-
-		this.removeFormationButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/remove_slide.png"))));
-		this.removeFormationButton.setOnAction(this);
 
 		this.moveUpFormationButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/move_up.png"))));
 		this.moveUpFormationButton.setOnAction(this);
 
 		this.moveDownFormationButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/move_down.png"))));
 		this.moveDownFormationButton.setOnAction(this);
+
+		this.removeFormationButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/remove_slide.png"))));
+		this.removeFormationButton.setOnAction(this);
 
 		final Region region = new Region();
 		final HBox buttonsHBox = new HBox(this.addFormationButton, this.removeFormationButton, region, this.moveUpFormationButton, this.moveDownFormationButton);
@@ -149,6 +150,8 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 
 		final VBox formationsVBox = new VBox(this.formations, buttonsHBox);
 		formationsVBox.setAlignment(Pos.CENTER);
+
+		computeDisabledButtons(-1);
 
 		final TitledPane nameTitledPane = new TitledPane(TextHelper.getText("slideFormNameTitledPane"), new HBox(nameTextField));
 		nameTitledPane.setCollapsible(false);
@@ -218,11 +221,6 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 			addFormation();
 		}
 
-		if (selectedButton == this.removeFormationButton)
-		{
-			removeFormation();
-		}
-
 		if (selectedButton == this.moveUpFormationButton)
 		{
 			moveUpFormation();
@@ -232,6 +230,11 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 		{
 			moveDownFormation();
 		}
+
+		if (selectedButton == this.removeFormationButton)
+		{
+			removeFormation();
+		}
 	}
 
 	/**
@@ -240,24 +243,8 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 	private void addFormation()
 	{
 		final Formation formation = new Formation();
-		((SlideWithOneTrombinoscope) this.slide).getFormations().add(formation);
 		this.formations.getItems().add(formation);
-
 		this.formations.getSelectionModel().select(formation);
-		computeDisabledButtons(this.formations.getItems().size());
-	}
-
-	/**
-	 * Remove a formation.
-	 */
-	private void removeFormation()
-	{
-		final Formation selectedFormation = this.formations.getSelectionModel().getSelectedItem();
-		((SlideWithOneTrombinoscope) this.slide).getFormations().remove(selectedFormation);
-		this.formations.getItems().remove(selectedFormation);
-
-		this.formations.getSelectionModel().clearSelection();
-		computeDisabledButtons(-1);
 	}
 
 	/**
@@ -287,12 +274,29 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 	private void moveFormation(Formation formation, int offset)
 	{
 		this.formations.getSelectionModel().selectedItemProperty().removeListener(this);
-		this.formations.getSelectionModel().clearSelection();
 		final int index = this.formations.getItems().indexOf(formation);
 		Collections.swap(this.formations.getItems(), index, index + offset);
-		this.formations.getSelectionModel().selectedItemProperty().addListener(this);
 		this.formations.getSelectionModel().select(formation);
 		computeDisabledButtons(index + offset);
+		this.formations.getSelectionModel().selectedItemProperty().addListener(this);
+	}
+
+	/**
+	 * Remove a formation.
+	 */
+	private void removeFormation()
+	{
+		final Formation selectedFormation = this.formations.getSelectionModel().getSelectedItem();
+
+		this.formations.getSelectionModel().selectedItemProperty().removeListener(this);
+		this.formations.getItems().remove(selectedFormation);
+		this.formations.getSelectionModel().clearSelection();
+		this.formations.getSelectionModel().selectedItemProperty().addListener(this);
+
+		unbindData(selectedFormation);
+		this.formationTitledPane.setExpanded(false);
+		this.formationTitledPane.setDisable(true);
+		computeDisabledButtons(-1);
 	}
 
 	/**
@@ -341,27 +345,39 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 	}
 
 	/**
-	 * @see javafx.beans.value.ChangeListener#changed(javafx.beans.value.ObservableValue, java.lang.Object, java.lang.Object)
+	 * Unbind data.
+	 * 
+	 * @param formation
+	 *            The formation to unbind.
 	 */
-	@Override
-	public void changed(ObservableValue<? extends Formation> observable, Formation oldValue, Formation newValue)
+	private void unbindData(Formation formation)
 	{
-		if (oldValue != null)
-		{
-			this.nameTextField.textProperty().unbindBidirectional(oldValue.getNameProperty());
-			this.introductionTextField.textProperty().unbindBidirectional(oldValue.getIntroductionProperty());
-			this.studentsTextField.clear();
-			this.conclusionTextField.textProperty().unbindBidirectional(oldValue.getConclusionProperty());
-			this.formationTitledPane.textProperty().unbindBidirectional(oldValue.getNameProperty());
-		}
-		else
-		{
-			this.formationTitledPane.setDisable(false);
-		}
+		this.nameTextField.textProperty().unbindBidirectional(formation.getNameProperty());
+		this.nameTextField.clear();
 
-		this.nameTextField.textProperty().bindBidirectional(newValue.getNameProperty());
-		this.introductionTextField.textProperty().bindBidirectional(newValue.getIntroductionProperty());
-		this.studentsTextField.setText(String.format(TextHelper.getText("slideFormImagesLoaded"), newValue.getStudents().size()));
+		this.introductionTextField.textProperty().unbindBidirectional(formation.getIntroductionProperty());
+		this.introductionTextField.clear();
+
+		this.studentsTextField.clear();
+
+		this.conclusionTextField.textProperty().unbindBidirectional(formation.getConclusionProperty());
+		this.conclusionTextField.clear();
+
+		this.formationTitledPane.textProperty().unbind();
+		this.formationTitledPane.setText(IConstants.DEFAULT_TEXT);
+	}
+
+	/**
+	 * Bind data.
+	 * 
+	 * @param formation
+	 *            The formation to bind.
+	 */
+	private void bindData(Formation formation)
+	{
+		this.nameTextField.textProperty().bindBidirectional(formation.getNameProperty());
+		this.introductionTextField.textProperty().bindBidirectional(formation.getIntroductionProperty());
+		this.studentsTextField.setText(String.format(TextHelper.getText("slideFormImagesLoaded"), formation.getStudents().size()));
 		this.studentsButton.setOnAction(e ->
 		{
 			final DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -369,20 +385,41 @@ public class SlideWithOneTrombinoscopeForm extends SlideForm implements EventHan
 			final File selectedDirectory = directoryChooser.showDialog(null);
 			if (selectedDirectory != null)
 			{
-				newValue.getStudents().clear();
+				final List<Student> students = formation.getStudents();
+				students.clear();
+
 				for (File file : selectedDirectory.listFiles())
 				{
 					final Matcher matcher = IConstants.DEFAULT_STUDENT_PATTERN.matcher(file.getName());
 					if (matcher.find())
 					{
-						newValue.getStudents().add(new Student(matcher.group(2), matcher.group(3), Base64Helper.encode(file)));
+						students.add(new Student(matcher.group(2), matcher.group(3), Base64Helper.encode(file)));
 					}
 				}
 
-				this.studentsTextField.setText(String.format(TextHelper.getText("slideFormImagesLoaded"), newValue.getStudents().size()));
+				this.studentsTextField.setText(String.format(TextHelper.getText("slideFormImagesLoaded"), students.size()));
 			}
 		});
-		this.conclusionTextField.textProperty().bindBidirectional(newValue.getConclusionProperty());
-		this.formationTitledPane.textProperty().bindBidirectional(newValue.getNameProperty());
+		this.conclusionTextField.textProperty().bindBidirectional(formation.getConclusionProperty());
+		this.formationTitledPane.textProperty().bind(formation.getNameProperty());
+	}
+
+	/**
+	 * @see javafx.beans.value.ChangeListener#changed(javafx.beans.value.ObservableValue, java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public void changed(ObservableValue<? extends Formation> observable, Formation oldValue, Formation newValue)
+	{
+		if (oldValue != null)
+		{
+			unbindData(oldValue);
+		}
+		else
+		{
+			this.formationTitledPane.setDisable(false);
+		}
+
+		bindData(newValue);
+		computeDisabledButtons(this.formations.getItems().indexOf(newValue));
 	}
 }

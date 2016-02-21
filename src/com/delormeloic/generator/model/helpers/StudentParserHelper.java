@@ -43,6 +43,6 @@ public class StudentParserHelper
 	 */
 	private static Student parseStudent(JSONObject student)
 	{
-		return new Student(student.getString(Student.LASTNAME_ATTRIBUTE), student.getString(Student.FIRSTNAME_ATTRIBUTE), student.getString(Student.IMAGE_ATTRIBUTE));
+		return new Student(student);
 	}
 }

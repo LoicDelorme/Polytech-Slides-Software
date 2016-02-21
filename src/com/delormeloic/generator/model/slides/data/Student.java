@@ -45,6 +45,19 @@ public class Student implements ISerializable
 	/**
 	 * Create a student.
 	 * 
+	 * @param data
+	 *            The data.
+	 */
+	public Student(JSONObject data)
+	{
+		this.lastname = data.getString(LASTNAME_ATTRIBUTE);
+		this.firstname = data.getString(FIRSTNAME_ATTRIBUTE);
+		this.image = data.getString(IMAGE_ATTRIBUTE);
+	}
+
+	/**
+	 * Create a student.
+	 * 
 	 * @param lastname
 	 *            The lastname.
 	 * @param firstname

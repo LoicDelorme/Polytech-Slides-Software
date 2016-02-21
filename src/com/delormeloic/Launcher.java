@@ -52,19 +52,6 @@ public class Launcher extends Application
 	}
 
 	/**
-	 * Handle all uncaught exceptions.
-	 * 
-	 * @param t
-	 *            The current thread.
-	 * @param e
-	 *            The exception.
-	 */
-	private static void uncaughtException(Thread t, Throwable e)
-	{
-		Logger.severe(new Exception(e));
-	}
-
-	/**
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
 	 */
 	@Override
@@ -81,5 +68,18 @@ public class Launcher extends Application
 		controller.bindView(view);
 
 		view.showWindow();
+	}
+
+	/**
+	 * Handle all uncaught exceptions.
+	 * 
+	 * @param t
+	 *            The current thread.
+	 * @param e
+	 *            The exception.
+	 */
+	private static void uncaughtException(Thread t, Throwable e)
+	{
+		Logger.severe(new Exception(e));
 	}
 }

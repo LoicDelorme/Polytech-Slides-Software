@@ -62,5 +62,5 @@ public interface IConstants
 	/**
 	 * The default student pattern 'STUDENTNUMBER_LASTNAME_FIRSTNAME'.
 	 */
-	public static final Pattern DEFAULT_STUDENT_PATTERN = Pattern.compile("(.*?)_(.*?)_(.*?)+(\\.(?i)(jpg|png))$");
+	public static final Pattern DEFAULT_STUDENT_PATTERN = Pattern.compile("(.*?)_(.*?)_(.*?).(jpg|png)");
 }

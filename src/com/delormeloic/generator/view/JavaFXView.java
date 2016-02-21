@@ -26,9 +26,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -545,7 +547,16 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 			computeDisabledButtons(-1);
 		}
 
+		final ScrollPane scrollPane = new ScrollPane(newValue.toForm());
+		scrollPane.setFitToWidth(true);
+
+		final AnchorPane anchorPane = new AnchorPane(scrollPane);
+		AnchorPane.setLeftAnchor(scrollPane, 0.0);
+		AnchorPane.setRightAnchor(scrollPane, 0.0);
+		AnchorPane.setTopAnchor(scrollPane, 0.0);
+		AnchorPane.setBottomAnchor(scrollPane, 0.0);
+
 		this.slideFormPane.getChildren().clear();
-		this.slideFormPane.getChildren().add(newValue.toForm());
+		this.slideFormPane.getChildren().add(anchorPane);
 	}
 }

@@ -30,7 +30,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -135,6 +134,7 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 		this.moveUpSlideButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/move_up.png"))));
 		this.moveDownSlideButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/move_down.png"))));
 		this.slideFormPane = new VBox();
+		final ScrollPane scrollPane = new ScrollPane(this.slideFormPane);
 
 		this.formables.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		this.slidesForms.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -144,8 +144,9 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 		this.moveUpSlideButton.setOnAction(this);
 		this.moveDownSlideButton.setOnAction(this);
 		this.slideFormPane.setAlignment(Pos.TOP_LEFT);
-
 		this.slideFormPane.setPadding(new Insets(8, 10, 8, 8));
+		scrollPane.setFitToWidth(true);
+		scrollPane.setStyle("-fx-background-color:transparent;");
 
 		final Region region = new Region();
 		final HBox buttonsHBox = new HBox();
@@ -162,7 +163,7 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 
 		this.setTop(this.menuBar);
 		this.setLeft(dataVBox);
-		this.setCenter(this.slideFormPane);
+		this.setCenter(scrollPane);
 
 		disableMenuItems();
 		computeDisabledButtons(-1);
@@ -547,16 +548,7 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 			computeDisabledButtons(-1);
 		}
 
-		final ScrollPane scrollPane = new ScrollPane(newValue.toForm());
-		scrollPane.setFitToWidth(true);
-
-		final AnchorPane anchorPane = new AnchorPane(scrollPane);
-		AnchorPane.setLeftAnchor(scrollPane, 0.0);
-		AnchorPane.setRightAnchor(scrollPane, 0.0);
-		AnchorPane.setTopAnchor(scrollPane, 0.0);
-		AnchorPane.setBottomAnchor(scrollPane, 0.0);
-
 		this.slideFormPane.getChildren().clear();
-		this.slideFormPane.getChildren().add(anchorPane);
+		this.slideFormPane.getChildren().add(newValue.toForm());
 	}
 }

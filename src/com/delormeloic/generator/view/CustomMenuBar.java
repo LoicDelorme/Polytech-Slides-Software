@@ -6,6 +6,7 @@ import com.delormeloic.generator.controller.IController;
 import com.delormeloic.generator.view.helpers.TextHelper;
 import com.delormeloic.utils.logger.Logger;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -96,16 +97,20 @@ public class CustomMenuBar extends MenuBar implements EventHandler<ActionEvent>
 	 *            The controller.
 	 * @param view
 	 *            The view.
+	 * @param menuProperty
+	 *            The menu property.
 	 */
-	public CustomMenuBar(IController controller, IView view)
+	public CustomMenuBar(IController controller, IView view, BooleanProperty menuProperty)
 	{
 		this.controller = controller;
 		this.view = view;
+
 		this.fileMenu = new Menu(TextHelper.getText("customMenuBarFileMenu"), null, this.newProject, this.openProject, this.saveProject, this.saveAsProject, this.closeProject, new SeparatorMenuItem(), this.exit);
 		this.informationMenu = new Menu(TextHelper.getText("customMenuBarAboutMenu"), null, this.githubProject, this.contact, new SeparatorMenuItem(), this.about);
 
 		initializeSetOnAction();
 		initializeSetAccelerator();
+		initializeBinding(menuProperty);
 
 		this.getMenus().addAll(this.fileMenu, this.informationMenu);
 	}
@@ -140,73 +145,16 @@ public class CustomMenuBar extends MenuBar implements EventHandler<ActionEvent>
 	}
 
 	/**
-	 * Enable the "Save project" menu item.
-	 */
-	public void enableSaveProjectMenuItem()
-	{
-		enableMenuItem(this.saveProject);
-	}
-
-	/**
-	 * Enable the "Save as project" menu item.
-	 */
-	public void enableSaveAsProjectMenuItem()
-	{
-		enableMenuItem(this.saveAsProject);
-	}
-
-	/**
-	 * Enable the "Close project" menu item.
-	 */
-	public void enableCloseProjectMenuItem()
-	{
-		enableMenuItem(this.closeProject);
-	}
-
-	/**
-	 * Disable the "Save project" menu item.
-	 */
-	public void disableSaveProjectMenuItem()
-	{
-		disableMenuItem(this.saveProject);
-	}
-
-	/**
-	 * Disable the "Save as project" menu item.
-	 */
-	public void disableSaveAsProjectMenuItem()
-	{
-		disableMenuItem(this.saveAsProject);
-	}
-
-	/**
-	 * Disable the "Close project" menu item.
-	 */
-	public void disableCloseProjectMenuItem()
-	{
-		disableMenuItem(this.closeProject);
-	}
-
-	/**
-	 * Enable a menu item.
+	 * Initialize the binding.
 	 * 
-	 * @param menuItem
-	 *            The menu item to enable.
+	 * @param menuProperty
+	 *            The menu property.
 	 */
-	private void enableMenuItem(MenuItem menuItem)
+	private void initializeBinding(BooleanProperty menuProperty)
 	{
-		menuItem.setDisable(false);
-	}
-
-	/**
-	 * Disable a menu item.
-	 * 
-	 * @param menuItem
-	 *            The menu item to disable.
-	 */
-	private void disableMenuItem(MenuItem menuItem)
-	{
-		menuItem.setDisable(true);
+		this.saveProject.disableProperty().bind(menuProperty);
+		this.saveAsProject.disableProperty().bind(menuProperty);
+		this.closeProject.disableProperty().bind(menuProperty);
 	}
 
 	/**
@@ -254,9 +202,6 @@ public class CustomMenuBar extends MenuBar implements EventHandler<ActionEvent>
 		{
 			try
 			{
-				disableSaveProjectMenuItem();
-				disableSaveAsProjectMenuItem();
-				disableCloseProjectMenuItem();
 				this.controller.notifyCloseProject();
 			}
 			catch (IOException e)

@@ -17,6 +17,8 @@ import com.delormeloic.generator.view.slidesforms.IFormable;
 import com.delormeloic.generator.view.slidesforms.SlideForm;
 import com.delormeloic.utils.logger.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -68,9 +70,14 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 	private final Stage stage;
 
 	/**
-	 * The menu bar.
+	 * The title.
 	 */
-	private final CustomMenuBar menuBar;
+	private final String title;
+
+	/**
+	 * The menu property.
+	 */
+	private final BooleanProperty menuProperty;
 
 	/**
 	 * The formables items.
@@ -125,8 +132,9 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 	{
 		this.controller = controller;
 		this.stage = stage;
+		this.title = title;
+		this.menuProperty = new SimpleBooleanProperty(true);
 
-		this.menuBar = new CustomMenuBar(this.controller, this);
 		this.formables = new ListView<IFormable>();
 		this.slidesForms = new ListView<SlideForm>();
 		this.addSlideButton = new Button(null, new ImageView(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/add_slide.png"))));
@@ -161,16 +169,15 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 		dataVBox.getChildren().addAll(this.formables, this.slidesForms, buttonsHBox);
 		VBox.setVgrow(this.slidesForms, Priority.ALWAYS);
 
-		this.setTop(this.menuBar);
+		this.setTop(new CustomMenuBar(this.controller, this, this.menuProperty));
 		this.setLeft(dataVBox);
 		this.setCenter(scrollPane);
 
-		disableMenuItems();
 		computeDisabledButtons(-1);
 		this.addSlideButton.setDisable(true);
 
 		this.stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/com/delormeloic/generator/view/resources/images/polytech_icon.png")));
-		this.stage.setTitle(title);
+		this.stage.setTitle(this.title);
 		this.stage.setScene(new Scene(this, width, height));
 	}
 
@@ -204,6 +211,7 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 			if (selectedFile != null)
 			{
 				this.controller.notifyCreateNewProject(selectedFile);
+				updateStageTitle(selectedFile.getName());
 			}
 		}
 		catch (IOException e)
@@ -225,6 +233,7 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 			if (selectedFile != null)
 			{
 				this.controller.notifyOpenProject(selectedFile);
+				updateStageTitle(selectedFile.getName());
 			}
 		}
 		catch (IOException e)
@@ -246,12 +255,31 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 			if (selectedFile != null)
 			{
 				this.controller.notifySaveAsProject(selectedFile);
+				updateStageTitle(selectedFile.getName());
 			}
 		}
 		catch (IOException e)
 		{
 			Logger.severe(e);
 			displayErrorPopUpWindow(e.getMessage());
+		}
+	}
+
+	/**
+	 * Update the stage title.
+	 * 
+	 * @param fileName
+	 *            The file name.
+	 */
+	private void updateStageTitle(String fileName)
+	{
+		if (fileName.isEmpty())
+		{
+			this.stage.setTitle(this.title);
+		}
+		else
+		{
+			this.stage.setTitle(String.format("%s - %s", this.title, fileName));
 		}
 	}
 
@@ -311,7 +339,6 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 	{
 		clearData();
 
-		enableMenuItems();
 		this.addSlideButton.setDisable(false);
 
 		this.slidesForms.getItems().addAll(slidesForms);
@@ -327,7 +354,8 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 	@Override
 	public void clearData()
 	{
-		disableMenuItems();
+		updateStageTitle("");
+		this.menuProperty.set(!this.menuProperty.get());
 		computeDisabledButtons(-1);
 		this.addSlideButton.setDisable(true);
 
@@ -385,12 +413,12 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 	{
 		this.slidesForms.getSelectionModel().selectedItemProperty().removeListener(this);
 		this.slidesForms.getSelectionModel().clearSelection();
-		final int index = this.slidesForms.getItems().indexOf(slideForm);
-		Collections.swap(this.slidesForms.getItems(), index, index + offset);
+		final int currentIndex = this.slidesForms.getItems().indexOf(slideForm);
+		Collections.swap(this.slidesForms.getItems(), currentIndex, currentIndex + offset);
 		this.slidesForms.getSelectionModel().select(slideForm);
 		this.slidesForms.getSelectionModel().selectedItemProperty().addListener(this);
 
-		this.computeDisabledButtons(index + offset);
+		this.computeDisabledButtons(currentIndex + offset);
 	}
 
 	/**
@@ -406,26 +434,6 @@ public class JavaFXView extends BorderPane implements IView, EventHandler<Action
 
 		this.computeDisabledButtons(-1);
 		this.slideFormPane.getChildren().clear();
-	}
-
-	/**
-	 * Enable the menu items.
-	 */
-	private void enableMenuItems()
-	{
-		this.menuBar.enableSaveProjectMenuItem();
-		this.menuBar.enableSaveAsProjectMenuItem();
-		this.menuBar.enableCloseProjectMenuItem();
-	}
-
-	/**
-	 * Disable the menu items.
-	 */
-	private void disableMenuItems()
-	{
-		this.menuBar.disableSaveProjectMenuItem();
-		this.menuBar.disableSaveAsProjectMenuItem();
-		this.menuBar.disableCloseProjectMenuItem();
 	}
 
 	/**

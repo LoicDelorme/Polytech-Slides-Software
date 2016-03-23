@@ -57,20 +57,7 @@ public class JSONPlainTextFileModel extends PlainTextFileModel
 	}
 
 	/**
-	 * @see com.delormeloic.generator.model.PlainTextFileModel#parseData(java.lang.String)
-	 */
-	@Override
-	public void parseData(String data)
-	{
-		final JSONObject parsedData = new JSONObject(data);
-		this.header = new Header(parsedData.getJSONObject(HEADER_ATTRIBUTE));
-		this.footer = new Footer(parsedData.getJSONObject(FOOTER_ATTRIBUTE));
-		this.background = new Background(parsedData.getJSONObject(BACKGROUND_ATTRIBUTE));
-		this.slides = new ArrayList<Slide>(SlideParserHelper.parseSlides(parsedData.getJSONArray(SLIDES_ATTRIBUTE)));
-	}
-
-	/**
-	 * @see com.delormeloic.generator.model.PlainTextFileModel#serializeData()
+	 * @see com.delormeloic.generator.model.DefaultModel#serializeData()
 	 */
 	@Override
 	public String serializeData()
@@ -88,5 +75,18 @@ public class JSONPlainTextFileModel extends PlainTextFileModel
 		serializedData.put(SLIDES_ATTRIBUTE, slidesData);
 
 		return serializedData.toString(INDENT_FACTOR);
+	}
+
+	/**
+	 * @see com.delormeloic.generator.model.DefaultModel#deserializeData(java.lang.String)
+	 */
+	@Override
+	public void deserializeData(String data)
+	{
+		final JSONObject deserializedData = new JSONObject(data);
+		this.header = new Header(deserializedData.getJSONObject(HEADER_ATTRIBUTE));
+		this.footer = new Footer(deserializedData.getJSONObject(FOOTER_ATTRIBUTE));
+		this.background = new Background(deserializedData.getJSONObject(BACKGROUND_ATTRIBUTE));
+		this.slides = new ArrayList<Slide>(SlideParserHelper.parseSlides(deserializedData.getJSONArray(SLIDES_ATTRIBUTE)));
 	}
 }

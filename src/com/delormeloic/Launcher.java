@@ -58,10 +58,10 @@ public class Launcher extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		Thread.setDefaultUncaughtExceptionHandler(Launcher::uncaughtException);
-		final Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+		final Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
 
 		final IController controller = new BasicController();
-		final IView view = new JavaFXView(controller, primaryStage, TextHelper.getText("applicationTitle"), screenSize.getWidth(), screenSize.getHeight());
+		final IView view = new JavaFXView(controller, primaryStage, TextHelper.getText("applicationTitle"), visualBounds.getWidth(), visualBounds.getHeight());
 		final IModel model = new JSONPlainTextFileModel(controller);
 
 		controller.bindModel(model);

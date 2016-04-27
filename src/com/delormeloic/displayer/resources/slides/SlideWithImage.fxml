@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="leftFooterImageView" pickOnBounds="true" preserveRatio="true" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="middleFooterText" />
+            <Region HBox.hgrow="ALWAYS" />
+            <ImageView fx:id="rightFooterImageView" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox alignment="CENTER" fillHeight="false" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="headerMiddleText" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
